@@ -1,0 +1,13 @@
+.form-row label {
+    width: 100%;
+    max-width: 100%;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+.form-row input[type="text"], .form-row select {
+    width: 100%;
+    max-width: 100%;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
