@@ -8,10 +8,22 @@ import { Ticket } from './ticket';
 })
 export class TicketService {
 
-  private baseURL="localhost:8080//tickets";
+  private baseURL="http://localhost:8080/incidents";
   constructor(private httpClient : HttpClient) { }
 
   getTicketsList(): Observable<Ticket[]>{
     return this.httpClient.get<Ticket[]>(`${this.baseURL}`) ;
   }
+
+  getUsers(user:any) {
+    return this.httpClient.get<any>("http://localhost:8080/searchByUser?firstName="+user).toPromise() ;
+  }
+
+  getAssigned(user:any) {
+    return this.httpClient.get<any>("http://localhost:8080/searchByAdmin?firstName="+user).toPromise() ;
+  }
+
+  // searchTicket(ticket:Ticket){
+  //   return this.httpClient.post<Ticket>("http://localhost:8080/search",ticket);
+  // }
 }

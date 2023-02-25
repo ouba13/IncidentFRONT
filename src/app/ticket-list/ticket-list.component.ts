@@ -9,15 +9,70 @@ import { TicketService } from '../ticket.service';
 })
 export class TicketListComponent implements OnInit {
   Tickets!: Ticket[];
-  constructor(private ticketService : TicketService) { }
+  ticketSearched !: Ticket[];
+  constructor(private ticketService: TicketService) { }
+
+  text = "";
+  textAssign = "";
+  results!: any[];
+  resultsAssign!: any[];
+
+  search(event: any) {
+    this.ticketService.getUsers(event.query).then(data => {
+      this.results = data;
+    });
+  }
+
+  searchAssign(event: any) {
+    this.ticketService.getAssigned(event.query).then(data => {
+      this.resultsAssign = data;
+    });
+  }
+
+
+
+  select(event: any) {
+    this.text = event.user_id;
+  }
+
+  selectAssign(event: any) {
+    this.textAssign = event.user_id;
+  }
 
   ngOnInit(): void {
-    this.getTickets() ;
+    this.getTickets();
+    
+  }
+
+
+  do(){
+    console.log(this.Tickets);
   }
   private getTickets() {
     this.ticketService.getTicketsList().subscribe(data => {
-      this.Tickets = data ;
+      this.Tickets = data;
     });
   }
+
+
+  ticketSearch(tsearch: any) {
+    const res: Ticket[] = [];
+    for (const tick of this.Tickets) {
+      const creationDateStr = tick.creationdate.toString(); // convert date to string
+      if (creationDateStr.includes(tsearch) ||
+          tick.assigne.toLowerCase().includes(tsearch.toLowerCase()) ||
+          tick.declarant.toLowerCase().includes(tsearch.toLowerCase()) ||
+          tick.status.toLowerCase().includes(tsearch.toLowerCase())) {
+        res.push(tick);
+      }
+    }
+    this.Tickets = res;
+    if (res.length === 0 || !tsearch) {
+      this.getTickets();
+    }
+  }
+  
+
+  
 
 }
