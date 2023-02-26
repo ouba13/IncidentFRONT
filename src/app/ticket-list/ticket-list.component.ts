@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Ticket } from '../ticket';
 import { TicketService } from '../ticket.service';
 
@@ -15,7 +16,7 @@ export class TicketListComponent implements OnInit {
   declarantInputValue: string = '';
   assignerInputValue: string = '';
   statusSelectValue: string = '';
-  constructor(private ticketService: TicketService) { }
+  constructor(private ticketService: TicketService , private router : Router) { }
 
   text = "";
   textAssign = "";
@@ -80,6 +81,10 @@ export class TicketListComponent implements OnInit {
     if (res.length === 0 || !tsearch) {
       this.getTickets();
     }
+  }
+
+  viewTicketDetail(id : number){
+   this.router.navigate(['ticketInfo' , id]); 
   }
 
 

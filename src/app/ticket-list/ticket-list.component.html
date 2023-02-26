@@ -56,6 +56,7 @@
           <th scope="col">Signaler Par</th>
           <th scope="col">Date</th>
           <th scope="col">Status</th>
+          <th scope="col">Action</th>
 
         </tr>
       </thead>
@@ -67,7 +68,7 @@
           <td>{{T.declarant.firstName}}</td>
           <td>{{T.creationdate}}</td>
           <td>{{T.status.label}}</td>
-
+          <td><button (click)="viewTicketDetail(T.id)" class="btn btn-danger">view</button></td>
         </tr>
       </tbody>
     </table>

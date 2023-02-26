@@ -15,6 +15,11 @@ export class TicketService {
     return this.httpClient.get<Ticket[]>(`${this.baseURL}`) ;
   }
 
+  getTicketById(id: number): Observable<Ticket> {
+    const url = `${this.baseURL}/${id}`;
+    return this.httpClient.get<Ticket>(url);
+  }
+
   getUsers(user:any) {
     return this.httpClient.get<any>("http://localhost:8080/searchByUser?firstName="+user).toPromise() ;
   }

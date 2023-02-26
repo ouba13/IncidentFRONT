@@ -11,12 +11,14 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule }   from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TicketListComponent
+    TicketListComponent,
+    TicketDetailComponent
   ],
   imports: [
     BrowserModule,
