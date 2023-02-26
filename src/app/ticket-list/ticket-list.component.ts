@@ -10,6 +10,11 @@ import { TicketService } from '../ticket.service';
 export class TicketListComponent implements OnInit {
   Tickets!: Ticket[];
   ticketSearched !: Ticket[];
+
+  dateInputValue: string = '';
+  declarantInputValue: string = '';
+  assignerInputValue: string = '';
+  statusSelectValue: string = '';
   constructor(private ticketService: TicketService) { }
 
   text = "";
@@ -17,6 +22,13 @@ export class TicketListComponent implements OnInit {
   results!: any[];
   resultsAssign!: any[];
 
+  submitForm(form: any) {
+    this.ticketService.submitForm(form).subscribe(
+      response => {
+        console.log(response)       //respone  =  feha el object eli fih donnes je mel backend
+      }
+    );
+  }
   search(event: any) {
     this.ticketService.getUsers(event.query).then(data => {
       this.results = data;
@@ -41,13 +53,11 @@ export class TicketListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTickets();
-    
+
   }
 
 
-  do(){
-    console.log(this.Tickets);
-  }
+
   private getTickets() {
     this.ticketService.getTicketsList().subscribe(data => {
       this.Tickets = data;
@@ -60,9 +70,9 @@ export class TicketListComponent implements OnInit {
     for (const tick of this.Tickets) {
       const creationDateStr = tick.creationdate.toString(); // convert date to string
       if (creationDateStr.includes(tsearch) ||
-          tick.assigne.toLowerCase().includes(tsearch.toLowerCase()) ||
-          tick.declarant.toLowerCase().includes(tsearch.toLowerCase()) ||
-          tick.status.toLowerCase().includes(tsearch.toLowerCase())) {
+        tick.assigne.toLowerCase().includes(tsearch.toLowerCase()) ||
+        tick.declarant.toLowerCase().includes(tsearch.toLowerCase()) ||
+        tick.status.toLowerCase().includes(tsearch.toLowerCase())) {
         res.push(tick);
       }
     }
@@ -71,8 +81,8 @@ export class TicketListComponent implements OnInit {
       this.getTickets();
     }
   }
-  
 
-  
+
+
 
 }

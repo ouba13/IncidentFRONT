@@ -1,69 +1,75 @@
 <div class="card shadow rounded">
   <div class="card-body">
-    <form >
+    <form #form (submit)="submitForm(form)">
       <div class="form-row">
         <div class="col-sm-3">
           <label for="date-input" class="col-form-label">Date:</label>
-          <input type="date" class="form-control" id="date-input" placeholder="Enter date" #dateInput>
-        </div> 
+          <input type="date" class="form-control" id="date-input" placeholder="Enter date" [(ngModel)]="dateInputValue"
+            name="dateInput">
+        </div>
         <div class="col-sm-3">
           <label for="input-field1" class="col-form-label">Declarant</label>
-          <p-autoComplete class="autocomplete-input  testo" [forceSelection]="true" (onSelect)="select($event)" placeholder="Nom du Declarant" field="firstName" [minLength]="3" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>
-        </div>          
+          <p-autoComplete class="autocomplete-input  testo" [forceSelection]="true" (onSelect)="select($event)"
+            placeholder="Nom du Declarant" field="firstName" [suggestions]="results" (completeMethod)="search($event)"
+            [(ngModel)]="declarantInputValue" name="declarantInput"></p-autoComplete>
+        </div>
         <div class="col-sm-3">
           <label for="input-field2" class="col-form-label">Assigner à</label>
-          <p-autoComplete class="autocomplete-input test" [forceSelection]="true" (onSelect)="selectAssign($event)" placeholder="Nom du assigner" field="firstName" [minLength]="3" [suggestions]="resultsAssign" (completeMethod)="searchAssign($event)"></p-autoComplete>
+          <p-autoComplete class="autocomplete-input test" [forceSelection]="true" (onSelect)="selectAssign($event)"
+            placeholder="Nom du assigner" field="firstName" [suggestions]="resultsAssign"
+            (completeMethod)="searchAssign($event)" [(ngModel)]="assignerInputValue"
+            name="assignerInput"></p-autoComplete>
         </div>
         <div class="col-sm-3">
           <label for="status-select" class="col-form-label">Status:</label>
           <div class="input-group">
-            <select class="form-control" id="status-select" >
+            <select class="form-control" id="status-select" [(ngModel)]="statusSelectValue" name="statusSelect">
               <option>declancher</option>
-              <option>En cours</option>
-              <option>Terminer</option>  
+              <option>enCour</option>
+              <option>terminer</option>
             </select>
           </div>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-12 text-right">
-          <button type="submit" class="btn btn-primary">Rechercher test</button>
+          <button type="submit" class="btn btn-primary">Rechercher</button>
         </div>
       </div>
     </form>
+
   </div>
-</div> 
+</div>
 
 
 
 
 
 <div class="d-flex align-items-center justify-content-center" style="height: 50vh">
-    <div class="table-responsive" style="width:80%; margin-top :40px">
-      <table class="table table-hover">
-          <thead>
-          <tr>
-              <th scope="col">Id-Ticket</th>
-              <th scope="col">Description</th>
-              <th scope="col">asignerA</th>
-              <th scope="col">Signaler Par</th>
-              <th scope="col">Date</th>
-              <th scope="col">Status</th>
-              
-          </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let T of Tickets ">
-                  <td>{{T.id}}</td>
-                  <td>{{T.libelle}}</td>
-                  <td>{{T.assigne.firstName}}</td>
-                  <td>{{T.declarant.firstName}}</td>
-                  <td>{{T.creationdate}}</td>
-                  <td>{{T.status.label}}</td>
-                  
-              </tr>
-          </tbody>
-      </table>
-    </div>
-  </div> 
+  <div class="table-responsive" style="width:80%; margin-top :40px">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Id-Ticket</th>
+          <th scope="col">Description</th>
+          <th scope="col">asignerA</th>
+          <th scope="col">Signaler Par</th>
+          <th scope="col">Date</th>
+          <th scope="col">Status</th>
 
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let T of Tickets ">
+          <td>{{T.id}}</td>
+          <td>{{T.libelle}}</td>
+          <td>{{T.assigne.firstName}}</td>
+          <td>{{T.declarant.firstName}}</td>
+          <td>{{T.creationdate}}</td>
+          <td>{{T.status.label}}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -23,7 +23,13 @@ export class TicketService {
     return this.httpClient.get<any>("http://localhost:8080/searchByAdmin?firstName="+user).toPromise() ;
   }
 
-  // searchTicket(ticket:Ticket){
-  //   return this.httpClient.post<Ticket>("http://localhost:8080/search",ticket);
-  // }
+
+  submitForm(form: any) {
+    const formData: FormData = new FormData();
+    formData.append('dateInput', form.dateInput.value);
+    formData.append('declarantInput', form.declarantInput.value);
+    formData.append('assignerInput', form.assignerInput.value);
+    formData.append('statusSelect', form.statusSelect.value);
+    return this.httpClient.post("http://localhost:8080/search", formData);
+  }
 }
