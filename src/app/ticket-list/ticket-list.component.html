@@ -1,6 +1,6 @@
 <div class="card shadow rounded">
   <div class="card-body">
-    <form #form (submit)="submitForm(form)">
+     <form #form  > <!--(submit)="submitForm(form)" -->
       <div class="form-row">
         <div class="col-sm-3">
           <label for="date-input" class="col-form-label">Date:</label>
@@ -69,6 +69,7 @@
           <td>{{T.creationdate}}</td>
           <td>{{T.status.label}}</td>
           <td><button (click)="viewTicketDetail(T.id)" class="btn btn-danger">view</button></td>
+          <td><button   (click)="updateTicket(T.id)" class="btn btn-info">update</button></td>
         </tr>
       </tbody>
     </table>

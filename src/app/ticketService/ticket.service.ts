@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ticket } from './ticket';
+import { Ticket } from '../ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +29,14 @@ export class TicketService {
   }
 
 
-  submitForm(form: any) {
-    const formData: FormData = new FormData();
-    formData.append('dateInput', form.dateInput.value);
-    formData.append('declarantInput', form.declarantInput.value);
-    formData.append('assignerInput', form.assignerInput.value);
-    formData.append('statusSelect', form.statusSelect.value);
-    return this.httpClient.post("http://localhost:8080/search", formData);
-  }
+  // submitForm(form: any) {
+  //   const formData: FormData = new FormData();
+  //   formData.append('dateInput', form.dateInput.value);
+  //   formData.append('declarantInput', form.declarantInput.value);
+  //   formData.append('assignerInput', form.assignerInput.value);
+  //   formData.append('statusSelect', form.statusSelect.value);
+  //   return this.httpClient.post("http://localhost:8080/search", formData);
+  // }
+
+
 }

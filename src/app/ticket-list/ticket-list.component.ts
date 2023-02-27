@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ticket } from '../ticket';
-import { TicketService } from '../ticket.service';
+import { TicketService } from '../ticketService/ticket.service';
 
 @Component({
   selector: 'app-ticket-list',
@@ -23,13 +23,13 @@ export class TicketListComponent implements OnInit {
   results!: any[];
   resultsAssign!: any[];
 
-  submitForm(form: any) {
-    this.ticketService.submitForm(form).subscribe(
-      response => {
-        console.log(response)       //respone  =  feha el object eli fih donnes je mel backend
-      }
-    );
-  }
+  // submitForm(form: any) {
+  //   this.ticketService.submitForm(form).subscribe(
+  //     response => {
+  //       console.log(response)       //respone  =  feha el object eli fih donnes je mel backend
+  //     }
+  //   );
+  // }
   search(event: any) {
     this.ticketService.getUsers(event.query).then(data => {
       this.results = data;
@@ -85,6 +85,10 @@ export class TicketListComponent implements OnInit {
 
   viewTicketDetail(id : number){
    this.router.navigate(['ticketInfo' , id]); 
+  }
+
+  updateTicket(id:number){
+
   }
 
 
