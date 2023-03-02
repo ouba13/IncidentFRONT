@@ -11,10 +11,10 @@
     height: 408px;
     font-size: 16px;
     line-height: 31px;
-    padding: 0.375rem 0.75rem;
+
     border: 8px #ccc ;
     width: 100%;
-} 
+}
 
 .form-group.row {
     margin-top: 1.3rem;
@@ -34,10 +34,22 @@
     border-color: blue;
 }
 
+::ng-deep  p-autocomplete.testo>span
+{
+  width: 100%;
+}
 
-  
+::ng-deep p-autocomplete.testo>span>input
+{
+  width: 100%;
+}
+
+::ng-deep  p-autocomplete.testo
+{
+  padding-left: 0;
+}
 
 
-  
 
-  
+
+

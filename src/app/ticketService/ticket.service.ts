@@ -8,15 +8,15 @@ import { Ticket } from '../ticket';
 })
 export class TicketService {
 
-  private baseURL="http://localhost:8080/incidents";
+  private baseURL="http://localhost:8080";
   constructor(private httpClient : HttpClient) { }
 
   getTicketsList(): Observable<Ticket[]>{
-    return this.httpClient.get<Ticket[]>(`${this.baseURL}`) ;
+    return this.httpClient.get<Ticket[]>(`${this.baseURL}/incidents`) ;
   }
 
   getTicketById(id: number): Observable<Ticket> {
-    const url = `${this.baseURL}/${id}`;
+    const url = `${this.baseURL}/incident/${id}`;
     return this.httpClient.get<Ticket>(url);
   }
 
@@ -38,5 +38,7 @@ export class TicketService {
   //   return this.httpClient.post("http://localhost:8080/search", formData);
   // }
 
-
+  search(filter: any) {
+    return this.httpClient.post('http://localhost:8080/search', filter);
+  }
 }

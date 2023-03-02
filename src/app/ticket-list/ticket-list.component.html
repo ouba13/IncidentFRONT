@@ -1,6 +1,6 @@
 <div class="card shadow rounded">
   <div class="card-body">
-     <form #form  > <!--(submit)="submitForm(form)" -->
+    <form #form (submit)="submitForm()"> <!--(submit)="submitForm(form)" -->
       <div class="form-row">
         <div class="col-sm-3">
           <label for="date-input" class="col-form-label">Date:</label>
@@ -33,11 +33,11 @@
       </div>
       <div class="form-group row">
         <div class="col-sm-12 text-right">
-          <button type="submit" class="btn btn-primary">Rechercher</button>
+          <button (click)="getTickets()" class="btn btn-warning">Rest</button>&nbsp;
+          <button type="submit" class="btn btn-primary">Search</button>
         </div>
       </div>
     </form>
-
   </div>
 </div>
 
@@ -56,7 +56,7 @@
           <th scope="col">Signaler Par</th>
           <th scope="col">Date</th>
           <th scope="col">Status</th>
-          <th scope="col">Action</th>
+          <th style="text-align: center;" scope="col">Action</th>
 
         </tr>
       </thead>
@@ -68,8 +68,9 @@
           <td>{{T.declarant.firstName}}</td>
           <td>{{T.creationdate}}</td>
           <td>{{T.status.label}}</td>
-          <td><button (click)="viewTicketDetail(T.id)" class="btn btn-danger">view</button></td>
-          <td><button   (click)="updateTicket(T.id)" class="btn btn-info">update</button></td>
+          <td><button (click)="viewTicketDetail(T.id)" class="btn btn-danger">view</button>&nbsp;
+            <button (click)="updateTicket(T.id)" class="btn btn-info">update</button>
+          </td>
         </tr>
       </tbody>
     </table>

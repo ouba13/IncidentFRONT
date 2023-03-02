@@ -9,27 +9,64 @@ import { TicketService } from '../ticketService/ticket.service';
   styleUrls: ['./ticket-list.component.css']
 })
 export class TicketListComponent implements OnInit {
-  Tickets!: Ticket[];
+  Tickets!: any;
   ticketSearched !: Ticket[];
 
-  dateInputValue: string = '';
-  declarantInputValue: string = '';
-  assignerInputValue: string = '';
-  statusSelectValue: string = '';
+  dateInputValue: any = '';
+  declarantInputValue: any = '';
+  assignerInputValue: any = '';
+  statusSelectValue: any = '';
   constructor(private ticketService: TicketService , private router : Router) { }
 
   text = "";
   textAssign = "";
-  results!: any[];
+  results!: any;
   resultsAssign!: any[];
 
-  // submitForm(form: any) {
-  //   this.ticketService.submitForm(form).subscribe(
-  //     response => {
-  //       console.log(response)       //respone  =  feha el object eli fih donnes je mel backend
-  //     }
-  //   );
-  // }
+
+  submitForm() {
+    let filter: any = {where:[]};
+
+    if (this.dateInputValue != "") {
+      filter.where.push({
+        field: 'creationdate',
+        operator: '=',
+        modalities: [this.dateInputValue]
+      });
+    }
+
+    if (this.declarantInputValue != "") {
+      filter.where.push({
+        field: 'declarant',
+        operator: '=',
+        modalities: [this.declarantInputValue.firstName]
+      });
+    }
+
+    if (this.assignerInputValue != "") {
+      filter.where.push({
+        field: 'assigne',
+        operator: '=',
+        modalities: [this.assignerInputValue.firstName]
+      });
+    }
+
+    if (this.statusSelectValue != "") {
+      filter.where.push({
+        field: 'status',
+        operator: '=',
+        modalities: [this.statusSelectValue]
+      });
+    }
+
+    console.log(filter)
+    this.ticketService.search(filter).subscribe(
+      data => this.Tickets = data,
+      error => console.error(error)
+    );
+  }
+
+
   search(event: any) {
     this.ticketService.getUsers(event.query).then(data => {
       this.results = data;
@@ -59,7 +96,7 @@ export class TicketListComponent implements OnInit {
 
 
 
-  private getTickets() {
+  getTickets() {
     this.ticketService.getTicketsList().subscribe(data => {
       this.Tickets = data;
     });
@@ -84,13 +121,16 @@ export class TicketListComponent implements OnInit {
   }
 
   viewTicketDetail(id : number){
-   this.router.navigate(['ticketInfo' , id]); 
+   this.router.navigate(['ticketInfo' , id]);
   }
 
   updateTicket(id:number){
 
   }
 
+  resetIncidents(){
+    return this.Tickets;
+  }
 
 
 

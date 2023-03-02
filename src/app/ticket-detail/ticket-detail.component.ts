@@ -8,20 +8,23 @@ import { TicketService } from '../ticketService/ticket.service';
   templateUrl: './ticket-detail.component.html',
   styleUrls: ['./ticket-detail.component.css']
 })
-export class TicketDetailComponent implements OnInit{
+export class TicketDetailComponent implements OnInit {
 
   id!: number;
-  ticket : any;
+  ticket!: any;
 
-  constructor(private route : ActivatedRoute , private ticketService :TicketService){}
+  constructor(private route: ActivatedRoute, private ticketService: TicketService) {
+    this.id = this.route.snapshot.params['id'];
+
+    this.ticketService.getTicketById(this.id).subscribe(data => {
+      console.log(data)
+      this.ticket = data;
+    });
+
+
+   }
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'] ;
 
-      this.ticketService.getTicketById(this.id).subscribe(data => {
-        this.ticket = data;
-      });
-    
-  
   }
 
 }
