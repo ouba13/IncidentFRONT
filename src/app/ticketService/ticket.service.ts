@@ -15,6 +15,15 @@ export class TicketService {
     return this.httpClient.get<Ticket[]>(`${this.baseURL}/incidents`) ;
   }
 
+  createTicket(ticket:Ticket): Observable<Ticket[]>{
+    return this.httpClient.post<Ticket[]>(`${this.baseURL}/addIncident`,ticket) ;
+  }
+
+  updateTicket(id: number, ticket: any): Observable<Ticket> {
+    return this.httpClient.put<Ticket>(`${this.baseURL}/incidents/${id}`, ticket);
+  }
+  
+
   getTicketById(id: number): Observable<Ticket> {
     const url = `${this.baseURL}/incident/${id}`;
     return this.httpClient.get<Ticket>(url);

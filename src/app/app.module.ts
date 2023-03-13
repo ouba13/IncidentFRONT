@@ -12,13 +12,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule }   from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
-
+import {ButtonModule} from 'primeng/button';
+import { AddTicketComponent } from './add-ticket/add-ticket.component';
+import { UpdateTicketComponent } from './update-ticket/update-ticket.component';
+import { ToastrModule } from 'ngx-toastr';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import {SidebarModule} from 'primeng/sidebar';
+ 
 
 @NgModule({
   declarations: [
     AppComponent,
     TicketListComponent,
-    TicketDetailComponent
+    TicketDetailComponent,
+    AddTicketComponent,
+    UpdateTicketComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,11 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
     DropdownModule ,
     CalendarModule ,
     TableModule,
-    InputTextModule
+    InputTextModule,
+    ButtonModule,
+    ToastrModule,
+    DropdownModule,
+    SidebarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

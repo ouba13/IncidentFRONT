@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ticket } from '../ticket';
 import { TicketService } from '../ticketService/ticket.service';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+
 
 @Component({
   selector: 'app-ticket-list',
@@ -9,8 +11,12 @@ import { TicketService } from '../ticketService/ticket.service';
   styleUrls: ['./ticket-list.component.css']
 })
 export class TicketListComponent implements OnInit {
+
   Tickets!: any;
   ticketSearched !: Ticket[];
+
+  first = 0;
+  rows = 10;
 
   dateInputValue: any = '';
   declarantInputValue: any = '';
@@ -22,8 +28,6 @@ export class TicketListComponent implements OnInit {
   textAssign = "";
   results!: any;
   resultsAssign!: any[];
-
-
   submitForm() {
     let filter: any = {where:[]};
 
@@ -92,8 +96,8 @@ export class TicketListComponent implements OnInit {
   ngOnInit(): void {
     this.getTickets();
 
-  }
 
+  }
 
 
   getTickets() {
@@ -124,12 +128,36 @@ export class TicketListComponent implements OnInit {
    this.router.navigate(['ticketInfo' , id]);
   }
 
-  updateTicket(id:number){
+  ajoutTicket(){
+    this.router.navigate(['ajoutTicket']);
+  }
 
+  updateTicket(id:number){
+    this.router.navigate(['updateTicket',id]);
   }
 
   resetIncidents(){
     return this.Tickets;
+  }
+
+  next() {
+    this.first = this.first + this.rows;
+  }
+
+  prev() {
+    this.first = this.first - this.rows;
+  }
+
+  reset() {
+    this.first = 0;
+  }
+
+  isLastPage(): boolean {
+    return this.Tickets ? this.first === (this.Tickets.length - this.rows): true;
+  }
+
+  isFirstPage(): boolean {
+    return this.Tickets ? this.first === 0 : true;
   }
 
 

@@ -1,4 +1,6 @@
-<div class="card shadow rounded">
+<app-sidebar></app-sidebar>
+<div class="card shadow rounded" style="margin-top: 50px;">
+  <app-sidebar></app-sidebar>
   <div class="card-body">
     <form #form (submit)="submitForm()"> <!--(submit)="submitForm(form)" -->
       <div class="form-row">
@@ -24,55 +26,64 @@
           <label for="status-select" class="col-form-label">Status:</label>
           <div class="input-group">
             <select class="form-control" id="status-select" [(ngModel)]="statusSelectValue" name="statusSelect">
-              <option>declancher</option>
               <option>enCour</option>
               <option>terminer</option>
+              <option>declancher</option>
+
             </select>
           </div>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-12 text-right">
-          <button (click)="getTickets()" class="btn btn-warning">Rest</button>&nbsp;
+          <button type="submit" class="btn btn-secondary" (click)="getTickets()" style="margin-right: 20px;">Refresh</button>
           <button type="submit" class="btn btn-primary">Search</button>
         </div>
       </div>
     </form>
   </div>
 </div>
-
-
-
-
-
-<div class="d-flex align-items-center justify-content-center" style="height: 50vh">
-  <div class="table-responsive" style="width:80%; margin-top :40px">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Id-Ticket</th>
-          <th scope="col">Description</th>
-          <th scope="col">asignerA</th>
-          <th scope="col">Signaler Par</th>
-          <th scope="col">Date</th>
-          <th scope="col">Status</th>
-          <th style="text-align: center;" scope="col">Action</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let T of Tickets ">
-          <td>{{T.id}}</td>
-          <td>{{T.libelle}}</td>
-          <td>{{T.assigne.firstName}}</td>
-          <td>{{T.declarant.firstName}}</td>
-          <td>{{T.creationdate}}</td>
-          <td>{{T.status.label}}</td>
-          <td><button (click)="viewTicketDetail(T.id)" class="btn btn-danger">view</button>&nbsp;
-            <button (click)="updateTicket(T.id)" class="btn btn-info">update</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="d-flex mt-2 ml-auto">
+  <button type="button" class="btn btn-success" (click)="ajoutTicket()">New Ticket</button>
 </div>
+
+
+<div class="card"  style="display: flex; justify-content: center; margin-top: 60px;">
+  <p-table [value]="Tickets" [paginator]="true" [rows]="2" [showCurrentPageReport]="true" 
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[2,5,10]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th scope="col">ID-Ticket</th>
+        <th scope="col">Description</th>
+        <th scope="col">Assigné à</th>
+        <th scope="col">Declaré Par</th>
+        <th scope="col">Date de Declaration</th>
+        <th scope="col"  >Status</th>
+        <th style="text-align: center;" scope="col">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-T>
+      <tr>
+        <td >{{ T.id }}</td>
+        <td >{{ T.libelle }}</td>
+        <td >{{ T.assigne.firstName }}</td>
+        <td >{{ T.declarant.firstName }}</td>
+        <td >{{ T.creationdate | date:'dd/MM/yyyy' }}</td>
+        <td [ngClass]="{'status-gray': T.status.label === 'enCour', 'status-green': T.status.label === 'terminer', 'status-red': T.status.label === 'declancher'}" class="badge badge-success rounded-pill d-inline">{{ T.status.label }}</td>
+        <td class="text-center btn2">
+          <button (click)="viewTicketDetail(T.id)" class="btn btn-danger">View</button>&nbsp;
+          <button (click)="updateTicket(T.id)" class="btn btn-info">Update</button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+  </ng-template>
+  <ng-template pTemplate="paginatorright">
+      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+  </ng-template>
+  </p-table>
+</div>
+
+
+
