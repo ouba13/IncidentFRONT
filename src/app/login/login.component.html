@@ -1,0 +1,34 @@
+<div class="login-container">
+    <div class="login-card">
+        <img class="login-img" src="../../assets/fs.jpg" alt="Login Image">
+        <h2 class="login-title">Welcome Back!</h2>
+        <form (ngSubmit)="onLoginSubmit()" [formGroup]="loginForm">
+            <div class="form-group">
+                <label for="input-email">Email address:</label>
+                <input type="email" class="form-control" id="input-email" placeholder="Enter your email"
+                    [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}"
+                    formControlName="email">
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                    class="invalid-feedback">
+                    <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+                    <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-password">Password:</label>
+                <input type="password" class="form-control" id="input-password" placeholder="Enter your password"
+                    [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}"
+                    formControlName="password">
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                    class="invalid-feedback">
+                    <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+                    <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password should be at least 6
+                        characters long.</div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn login-btn" [disabled]="!loginForm.valid">Login</button>
+            <p class="login-text">Don't have an account? <a (click)="navigateToTarget()">Sign up</a></p>
+        </form>
+    </div>
+</div>
