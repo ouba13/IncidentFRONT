@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Ticket } from '../ticket';
 import { TicketService } from '../ticketService/ticket.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { AuthService } from '../authService/auth.service';
 
 
 @Component({
@@ -11,7 +13,6 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   styleUrls: ['./ticket-list.component.css']
 })
 export class TicketListComponent implements OnInit {
-
   Tickets!: any;
   ticketSearched !: Ticket[];
 
@@ -22,7 +23,7 @@ export class TicketListComponent implements OnInit {
   declarantInputValue: any = '';
   assignerInputValue: any = '';
   statusSelectValue: any = '';
-  constructor(private ticketService: TicketService , private router : Router) { }
+  constructor(private ticketService: TicketService , private router : Router,private authser:AuthService) { }
 
   text = "";
   textAssign = "";
@@ -158,6 +159,11 @@ export class TicketListComponent implements OnInit {
 
   isFirstPage(): boolean {
     return this.Tickets ? this.first === 0 : true;
+  }
+
+  logout() {
+    this.authser.logout();
+    this.router.navigate(['/login']);
   }
 
 

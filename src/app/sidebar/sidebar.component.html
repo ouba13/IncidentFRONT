@@ -1,16 +1,9 @@
-<div class="sidenav" [ngClass]="{'active': sidenavOpened}">
-    <h3>User</h3>
-    <ul>
-      <li>Profile</li>
-      <li>Settings</li>
-      <li>Logout</li>
-    </ul>
-    
-    <h3>Incidents</h3>
-    <ul>
-      <li>Reported Incidents</li>
-      <li>Resolved Incidents</li>
-      <li>Pending Incidents</li>
-    </ul>
-  </div>
-  
+<p-sidebar [(visible)]="sidebarVisible" class="side">
+  <h3>Sidebar</h3>
+  <span class="pi pi-users" style="font-size: 2.5rem; margin-top: 40px;">Users</span><br><br>
+  <span class="pi pi-chart-bar" style="font-size: 2.5rem; margin-top: 40px;">Statistics</span><br><br>
+  <span class="pi pi-chart-bar" style="font-size: 2.5rem; margin-top: 40px;">Incidents</span><br><br>
+  <span class="pi pi-chart-bar" style="font-size: 2.5rem; margin-top: 40px;">Reporting</span>
+  <span class="pi pi-amazon" style="font-size: 2.5rem; margin-top: 40px;">Amazon</span>
+</p-sidebar>
+<p-button (click)="sidebarVisible = true" icon="pi pi-arrow-right"></p-button>

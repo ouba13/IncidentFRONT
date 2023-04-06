@@ -1,6 +1,5 @@
-<app-sidebar></app-sidebar>
+<app-sidebar ></app-sidebar>
 <div class="card shadow rounded" style="margin-top: 50px;">
-  <app-sidebar></app-sidebar>
   <div class="card-body">
     <form #form (submit)="submitForm()"> <!--(submit)="submitForm(form)" -->
       <div class="form-row">
@@ -77,13 +76,15 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="paginatorleft">
-      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+      
   </ng-template>
   <ng-template pTemplate="paginatorright">
-      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+      
   </ng-template>
   </p-table>
 </div>
+
+<button (click)="logout()" class="btn btn-info">logout</button>
 
 
 

@@ -40,6 +40,7 @@
         <input type="password" id="password" name="password" required
           [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}"
           formControlName="password">
+          <p-button icon="pi pi-eye" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" ></p-button>
         <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
           class="invalid-feedback">
           <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>

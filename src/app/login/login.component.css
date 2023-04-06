@@ -106,4 +106,13 @@
     100% {
     transform: scale(1);
     }
+}
+.btn-toggle-password {
+  position: absolute;
+  top: 1.75rem;
+  right: 0.5rem;
 }  
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  background-image: none;
+}

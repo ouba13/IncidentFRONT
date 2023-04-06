@@ -13,7 +13,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class SignupComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private router: Router,private formBuilder: FormBuilder,private authser:AuthService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private authser: AuthService) { }
 
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
         Validators.minLength(6),
         this.matchOtherValidator('password')
       ]))
-      
+
     });
   }
   matchOtherValidator(otherControlName: string) {
@@ -64,27 +64,28 @@ export class SignupComponent implements OnInit {
   onRegisterSubmit(): void {
     if (this.registerForm.valid) {
       const user = {
-        first_name: this.registerForm.value.first_name,
-        last_name: this.registerForm.value.last_name,
+        firstname: this.registerForm.value.first_name,
+        lastname: this.registerForm.value.last_name,
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
         role: 'user'
       };
-       this.authser.addUser(user).subscribe(
-         (data)=>{
-             console.log(data);
-            alert("success");
-         },(error)=>{
-           console.log(error);
-           alert("something wrong");
-         }
-       )
-      console.log(user);
+      this.authser.addUser(user).subscribe(
+        (data) => {
+          console.log(data);
+          this.router.navigate(['/login']); // Redirect to login page
+        },
+        (error) => {
+          console.log(error);
+          alert('Something went wrong. Please try again later.');
+        }
+      );
     } else {
       alert('Please fill in all required fields.');
     }
   }
-  
+
+
 
   navigateToTarget() {
     this.router.navigate(['/login']);
