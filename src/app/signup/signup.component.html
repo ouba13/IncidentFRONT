@@ -35,12 +35,13 @@
           <div *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group position-relative">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required
+        <input type="password" [type]="showPassword ? 'password': 'text'" id="password" name="password" required
           [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}"
           formControlName="password">
-          <p-button icon="pi pi-eye" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" ></p-button>
+          <p-button icon="pi pi-eye" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="!showPassword" (click)="togglePasswordVisibility()" ></p-button>
+          <p-button icon="pi pi-eye-slash" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="showPassword" (click)="togglePasswordVisibility()"></p-button>
         <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
           class="invalid-feedback">
           <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
@@ -48,12 +49,14 @@
             long.</div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group position-relative">
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6"
           [pattern]="registerForm.controls['password'].value"
           [ngClass]="{'is-invalid': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched}"
-          formControlName="confirmPassword">
+          formControlName="confirmPassword" [type]="showConPassword ? 'password': 'text'">
+          <p-button icon="pi pi-eye" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="!showConPassword" (click)="togglePasswordVisibilityCon()" ></p-button>
+          <p-button icon="pi pi-eye-slash" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="showConPassword" (click)="togglePasswordVisibilityCon()"></p-button>
         <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
           class="invalid-feedback">
           <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</div>

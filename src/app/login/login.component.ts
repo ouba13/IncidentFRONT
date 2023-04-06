@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../authService/auth.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { AuthService } from '../authService/auth.service';
 export class LoginComponent {
 
   loginForm!: FormGroup;
-  showPassword = false;
+  showPassword = true;
   constructor(private router: Router, private formBuilder: FormBuilder,private authser:AuthService) { }
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -20,6 +21,7 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
     if (this.authser.isLoggedIn()) {
+      //to navigate to the home page after login**
       this.router.navigate(['/']);
     }
   }
@@ -35,13 +37,21 @@ export class LoginComponent {
         (data: any) => {
           if(data.token) {
             localStorage.setItem('token', data.token);
+            Swal.fire(
+              'Good job!',
+              'User logged In!',
+              'success'
+            )
             this.router.navigate(['/']);
-            console.log(data.token);
+            //console.log(data.token);
           }
           else {
-            alert('Token is empty');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Email or Password Incorrect!'
+            })
           }
-          
         },
         (error: any) => {
           console.error(error); // handle error

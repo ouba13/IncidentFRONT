@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../authService/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 
@@ -12,6 +13,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class SignupComponent implements OnInit {
   registerForm!: FormGroup;
+  showPassword=true;
+  showConPassword=true;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private authser: AuthService) { }
 
@@ -72,17 +75,33 @@ export class SignupComponent implements OnInit {
       };
       this.authser.addUser(user).subscribe(
         (data) => {
-          console.log(data);
+          //console.log(data);
+          Swal.fire(
+            'Good job!',
+            'Registration Done Successfully',
+            'success'
+          )
           this.router.navigate(['/login']); // Redirect to login page
         },
         (error) => {
           console.log(error);
-          alert('Something went wrong. Please try again later.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Check the fields please'
+          })
         }
       );
     } else {
       alert('Please fill in all required fields.');
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+  togglePasswordVisibilityCon(){
+    this.showConPassword = !this.showConPassword;
   }
 
 

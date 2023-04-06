@@ -116,5 +116,10 @@
       transform: scale(1);
     }
   }
+  .btn-toggle-password {
+    position: absolute;
+    top: 2.2rem;
+    right: 0.5rem;
+  }  
 
   

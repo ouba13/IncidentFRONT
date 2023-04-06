@@ -13,22 +13,13 @@ export class AuthGuard {
     | Promise<boolean | UrlTree>
     | boolean
      {
-      console.log(1)
+      
     if (this.authService.isLoggedIn()) {
-      console.log(2)
-
-      console.info('Please Log In!');
-      console.log(3)
-
       //this.router.navigate(['/logins']);
-      console.log(4)
-
       return true;
     }
     // logged in, so return true
     //this.authService.isLoggedIn();
- 
-    console.log(5)
     return false;
   }
 }
