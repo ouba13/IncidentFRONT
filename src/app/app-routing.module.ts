@@ -16,7 +16,7 @@ const routes: Routes = [
 { path : 'updateTicket/:id', component : UpdateTicketComponent,canActivate:[AuthGuard]},
 { path : 'login', component : LoginComponent},
 { path : 'sign', component : SignupComponent},
-{ path : 'reset', component : ResetPasswordComponent},
+{ path : 'resetPassword', component : ResetPasswordComponent},
 { path : 'resetCode', component : RestCodeComponent},
 
 

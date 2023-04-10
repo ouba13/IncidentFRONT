@@ -2,10 +2,10 @@
     <div class="login-card">
         <img class="login-img" src="../../assets/fs.jpg" alt="Login Image">
         <h2 class="login-title">Rest Password!</h2>
-        <form  [formGroup]="ResForm">
+        <form (ngSubmit)="onSubmit()"  [formGroup]="ResForm">
             <div class="form-group">
-                <label for="input-email">Email address:</label>
-                <input type="email" class="form-control" id="input-email" placeholder="Enter your email"
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email"
                     [ngClass]="{'is-invalid': ResForm.get('email')?.invalid && ResForm.get('email')?.touched}"
                     formControlName="email" autocomplete>
                 <div *ngIf="ResForm.get('email')?.invalid && ResForm.get('email')?.touched"
@@ -14,7 +14,7 @@
                     <div *ngIf="ResForm.get('email')?.errors?.['email']">Invalid email format.</div>
                 </div>
             </div>
-            
+
             <button type="submit" class="btn login-btn" (click)="navigateToRes()" [disabled]="!ResForm.valid">Send Code</button>
         </form>
     </div>

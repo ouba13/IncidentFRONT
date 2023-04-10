@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,19 @@ export class AuthService {
     return user.role;
   }
 
+  checkEmail(email:any):Observable<any>{
+    return this.httpClient.post<any>(`${this.baseURL}/api/v1/auth/checkEmail`,{email}).pipe(
+      map(
+        response=>{
+          return response;
+        }
+      )
+    )
+  }
+
+  resetPassword(email:any,token:any,password:any):Observable<any>{
+    return this.httpClient.post<any>(`${this.baseURL}/api/v1/auth/resetPassword`,{email,token,password})
+  }
 
 
 
