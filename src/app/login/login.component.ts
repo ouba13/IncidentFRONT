@@ -18,7 +18,7 @@ export class LoginComponent {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      emailReset: ['', [Validators.required, Validators.email]],
+      // emailReset: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
     if (this.authser.isLoggedIn()) {
@@ -72,8 +72,12 @@ export class LoginComponent {
     this.router.navigate(['/sign']);
   }
 
-  navigateToTargetRes() {
-    this.router.navigate(['/reset']);
+  // navigateToTargetRes() {
+  //   this.router.navigate(['/reset']);
+  // }
+
+  navigateToRES() {
+    this.router.navigate(['/resetCode']);
   }
 
 

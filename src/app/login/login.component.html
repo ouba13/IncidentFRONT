@@ -32,31 +32,10 @@
                     <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password should be at least 6
                         characters long.</div>
                 </div>
-                <p class="login-text"><a (click)="showModalDialog()" style="color:dodgerblue; margin-left: 363px;">Forget Your Password?</a></p>
+                <p class="login-text"><a style="color:dodgerblue; margin-left: 363px;" (click)="navigateToRES()">Forget Your Password?</a></p>
             </div>
 
-
-
-            <p-dialog header="Rest Password" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
-                [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-                <label for="input-email">Email address:</label>
-                <input type="email" class="form-control" id="input-email" placeholder="Enter your email"
-                    [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}"
-                    formControlName="email" autocomplete>
-                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
-                    class="invalid-feedback">
-                    <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
-                    <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</div>
-                </div>
-                <ng-template pTemplate="footer">
-                    <p-button icon="pi pi-check" (click)="displayModal=false" label="Rest"
-                        class="p-button-text"  (click)="navigateToTargetRes()"></p-button>
-                </ng-template>
-            </p-dialog>
-
-
-
-            <button type="submit" class="btn login-btn" [disabled]="!loginForm.valid">Login</button>
+            <button type="submit" class="btn login-btn" [disabled]="!loginForm.valid" >Login</button>
             <p class="login-text">Don't have an account? <a (click)="navigateToTarget()">Sign up</a></p>
         </form>
     </div>

@@ -24,6 +24,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { DialogModule } from 'primeng/dialog';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RestCodeComponent } from './rest-code/rest-code.component';
 
 
 
@@ -43,6 +44,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     SignupComponent,
     LoginComponent,
     ResetPasswordComponent,
+    RestCodeComponent,
     
   ],
   imports: [

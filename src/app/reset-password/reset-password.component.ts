@@ -20,44 +20,9 @@ export class ResetPasswordComponent {
       emailReset: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confiCode: ['', [Validators.required, Validators.minLength(4)]],
-      confirmPassword: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(6),
-        this.matchOtherValidator('password')
-      ]))
     });
 }
 
-matchOtherValidator(otherControlName: string) {
-  let thisControl: FormControl;
-  let otherControl: FormControl;
-
-  return function matchOtherValidate(control: FormControl) {
-    if (!control.parent) {
-      return null;
-    }
-
-    if (!thisControl) {
-      thisControl = control;
-      otherControl = control.parent.get(otherControlName) as FormControl;
-      otherControl.valueChanges.subscribe(() => {
-        thisControl.updateValueAndValidity();
-      });
-    }
-
-    if (!otherControl) {
-      return null;
-    }
-
-    if (otherControl.value !== thisControl.value) {
-      return {
-        matchOther: true
-      };
-    }
-
-    return null;
-  };
-}
 
 togglePasswordVisibility() {
   this.showPassword = !this.showPassword;
@@ -65,6 +30,9 @@ togglePasswordVisibility() {
 
 togglePasswordVisibilityCon(){
   this.showConPassword = !this.showConPassword;
+}
+navigateToLog(){
+  this.router.navigate(['/login'])
 }
 
 }
