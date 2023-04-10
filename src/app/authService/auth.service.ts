@@ -6,16 +6,16 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseURL = "http://localhost:8080";
+  private baseURL = "http://localhost:8080/api/v1/auth";
   constructor(private httpClient: HttpClient) { }
 
   public addUser(user: any) {
-    return this.httpClient.post(`${this.baseURL}/api/v1/auth/register`, user);
+    return this.httpClient.post(`${this.baseURL}/register`, user);
   }
 
 
   public TokenUser(loginData: any) {
-    return this.httpClient.post(`${this.baseURL}/api/v1/auth/authenticate`, loginData);
+    return this.httpClient.post(`${this.baseURL}/authenticate`, loginData);
   }
   public loginUser(token: any) {
     localStorage.setItem("token", token)
@@ -58,7 +58,7 @@ export class AuthService {
   }
 
   checkEmail(email:any):Observable<any>{
-    return this.httpClient.post<any>(`${this.baseURL}/api/v1/auth/checkEmail`,{email}).pipe(
+    return this.httpClient.post<any>(`${this.baseURL}/checkEmail`,{email}).pipe(
       map(
         response=>{
           return response;
@@ -68,7 +68,7 @@ export class AuthService {
   }
 
   resetPassword(email:any,token:any,password:any):Observable<any>{
-    return this.httpClient.post<any>(`${this.baseURL}/api/v1/auth/resetPassword`,{email,token,password})
+    return this.httpClient.post<any>(`${this.baseURL}/resetPassword`,{email,token,password})
   }
 
 

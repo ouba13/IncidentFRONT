@@ -32,23 +32,25 @@ togglePasswordVisibility() {
 togglePasswordVisibilityCon(){
   this.showConPassword = !this.showConPassword;
 }
+
 navigateToLog(){
   this.router.navigate(['/login'])
 }
 
 onSubmit() {
-  console.log('frst')
   if(this.ResetFom.valid){
     this.authService.resetPassword(
       this.ResetFom.value.email,
-      this.ResetFom.value.onfiCode,
+      this.ResetFom.value.confiCode,
       this.ResetFom.value.password
     ).subscribe(
       (data: any) => {
+        console.log("data.result = "+data.result)
         if(data.result == 1) {
+          console.log(data.result)
           Swal.fire(
             'Good job!',
-            'User logged In!',
+            'Password changed succesfully!',
             'success'
           )
           this.router.navigate(['/login']);
