@@ -27,7 +27,7 @@ export class LoginComponent {
     }
   }
 
-   
+
   onLoginSubmit(): void {
     if (this.loginForm.valid) {
       const user = {
@@ -50,19 +50,23 @@ export class LoginComponent {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Email or Password Incorrect!'
+              text: data.error
             })
           }
         },
         (error: any) => {
-          console.error(error); // handle error
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid email or password, Please check again.',
+          })// handle error
         }
       );
     } else {
       alert('Please fill in all required fields.');
     }
   }
-  
+
 
   navigateToTarget() {
     this.router.navigate(['/sign']);
@@ -72,7 +76,7 @@ export class LoginComponent {
     this.router.navigate(['/reset']);
   }
 
-  
+
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;

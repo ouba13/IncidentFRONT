@@ -72,14 +72,14 @@ export class SignupComponent implements OnInit {
         lastname: this.registerForm.value.last_name,
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
-        role: 'user'
+        role: 'USER'
       };
       this.authser.addUser(user).subscribe(
         (data) => {
           //console.log(data);
           Swal.fire(
             'Good job!',
-            'Registration Done Successfully',
+            'Registration Done Successfully, check email to verify your account.',
             'success'
           )
           this.router.navigate(['/login']); // Redirect to login page

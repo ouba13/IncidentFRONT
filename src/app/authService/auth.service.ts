@@ -12,6 +12,7 @@ export class AuthService {
     return this.httpClient.post(`${this.baseURL}/api/v1/auth/register`, user);
   }
 
+
   public TokenUser(loginData: any) {
     return this.httpClient.post(`${this.baseURL}/api/v1/auth/authenticate`, loginData);
   }
