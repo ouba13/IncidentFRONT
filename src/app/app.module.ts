@@ -22,6 +22,9 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { DialogModule } from 'primeng/dialog';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 
 
@@ -39,6 +42,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     SidebarComponent,
     SignupComponent,
     LoginComponent,
+    ResetPasswordComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -58,6 +63,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatFormFieldModule,
+    DialogModule
+    
  
     
     

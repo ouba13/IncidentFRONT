@@ -6,64 +6,46 @@
       <div class="form-row">
         <div class="form-group col">
           <label for="first_name">First Name</label>
-          <input type="text" id="first_name" name="first_name" required formControlName="first_name">
-          <div *ngIf="registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched"
-            class="invalid-feedback">
-            <div *ngIf="registerForm.get('first_name')?.errors?.['required']">First Name is required.</div>
-            <div *ngIf="registerForm.get('first_name')?.errors?.['minlength']">First Name must be at least 4 characters
-              long.</div>
-          </div>
+          <input type="text" id="first_name" name="first_name" required formControlName="first_name" [ngClass]="{'is-invalid': registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched}">
+            <div class="vald" *ngIf="registerForm.get('first_name')?.errors?.['required']">First Name is required.</div>
+            <div class="vald" *ngIf="registerForm.get('first_name')?.errors?.['minlength']">First Name Too short.</div>
         </div>
+
         <div class="form-group col">
           <label for="lastName">Last Name</label>
-          <input type="text" id="last_name" name="lastName" required minlength="4" formControlName="last_name">
-          <div *ngIf="registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched"
-            class="invalid-feedback">
-            <div *ngIf="registerForm.get('last_name')?.errors?.['required']">Last Name is required.</div>
-            <div *ngIf="registerForm.get('last_name')?.errors?.['minlength']">Last Name must be at least 4 characters
-              long.</div>
-          </div>
+          <input type="text" id="last_name" name="lastName" required minlength="4" formControlName="last_name" [ngClass]="{'is-invalid': registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched}">
+          <div class="vald" *ngIf="registerForm.get('last_name')?.errors?.['required']">Last Name is required.</div>
+          <div class="vald" *ngIf="registerForm.get('last_name')?.errors?.['minlength']">Last Name Too Short.</div>
         </div>
       </div>
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required
-          [ngClass]="{'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}"
-          formControlName="email">
-        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="invalid-feedback">
-          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
-          <div *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div>
-        </div>
-      </div>
+        <input type="email" id="email" name="email" required [ngClass]="{'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}" formControlName="email">
+            <div class="vald" *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+            <div class="vald" *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div>
+      </div>  
+
       <div class="form-group position-relative">
         <label for="password">Password</label>
         <input type="password" [type]="showPassword ? 'password': 'text'" id="password" name="password" required
-          [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}"
-          formControlName="password">
+          [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}" formControlName="password">
+          <div class="vald" *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div class="vald" *ngIf="registerForm.get('password')?.errors?.['minlength']">Password should be at least 6 characters long.</div>
           <p-button icon="pi pi-eye" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="!showPassword" (click)="togglePasswordVisibility()" ></p-button>
           <p-button icon="pi pi-eye-slash" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="showPassword" (click)="togglePasswordVisibility()"></p-button>
-        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
-          class="invalid-feedback">
-          <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
-          <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password should be at least 6 characters
-            long.</div>
-        </div>
       </div>
+
       <div class="form-group position-relative">
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6"
           [pattern]="registerForm.controls['password'].value"
           [ngClass]="{'is-invalid': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched}"
           formControlName="confirmPassword" [type]="showConPassword ? 'password': 'text'">
+          <div  class="vald" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</div>
+          <div class="vald" *ngIf="registerForm.get('confirmPassword')?.errors?.['minlength']">Confirm password must be at least 6 characters.</div>
+          <div class="vald" *ngIf="registerForm.get('confirmPassword')?.errors?.['pattern']">Passwords do not match.</div>
           <p-button icon="pi pi-eye" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="!showConPassword" (click)="togglePasswordVisibilityCon()" ></p-button>
           <p-button icon="pi pi-eye-slash" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="showConPassword" (click)="togglePasswordVisibilityCon()"></p-button>
-        <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
-          class="invalid-feedback">
-          <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</div>
-          <div *ngIf="registerForm.get('confirmPassword')?.errors?.['minlength']">Confirm password must be at least 6
-            characters.</div>
-          <div *ngIf="registerForm.get('confirmPassword')?.errors?.['pattern']">Passwords do not match.</div>
-        </div>
       </div>
 
       <button class="register-btn" type="submit" [disabled]="!registerForm.valid">Register</button>

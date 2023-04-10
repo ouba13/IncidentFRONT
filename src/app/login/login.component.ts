@@ -11,13 +11,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  displayModal!:boolean;
   loginForm!: FormGroup;
   showPassword = true;
   constructor(private router: Router, private formBuilder: FormBuilder,private authser:AuthService) { }
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
+      emailReset: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
     if (this.authser.isLoggedIn()) {
@@ -67,10 +68,19 @@ export class LoginComponent {
     this.router.navigate(['/sign']);
   }
 
+  navigateToTargetRes() {
+    this.router.navigate(['/reset']);
+  }
+
   
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+  showModalDialog() {
+    this.displayModal = true;
+  }
+
+
 
 }

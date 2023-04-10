@@ -7,13 +7,16 @@ import { TicketDetailComponent } from "./ticket-detail/ticket-detail.component";
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { UpdateTicketComponent } from './update-ticket/update-ticket.component';
 import { AuthGuard } from './guard/application-guard.service';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 const routes: Routes = [
 { path : 'ticketInfo/:id', component : TicketDetailComponent,canActivate:[AuthGuard]},
 { path : '', component : TicketListComponent,canActivate:[AuthGuard]},
 { path : 'ajoutTicket', component : AddTicketComponent,canActivate:[AuthGuard]},
 { path : 'updateTicket/:id', component : UpdateTicketComponent,canActivate:[AuthGuard]},
 { path : 'login', component : LoginComponent},
-{ path : 'sign', component : SignupComponent}
+{ path : 'sign', component : SignupComponent},
+{ path : 'reset', component : ResetPasswordComponent},
+
 
 
 
