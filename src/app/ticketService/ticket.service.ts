@@ -8,7 +8,7 @@ import { Ticket } from '../ticket';
 })
 export class TicketService {
 
-  private baseURL="http://localhost:8080";
+  private baseURL="http://localhost:8080/api/v1/incident";
   constructor(private httpClient : HttpClient) { }
 
   getTicketsList(): Observable<Ticket[]>{
@@ -22,7 +22,7 @@ export class TicketService {
   updateTicket(id: number, ticket: any): Observable<Ticket> {
     return this.httpClient.put<Ticket>(`${this.baseURL}/incidents/${id}`, ticket);
   }
-  
+
 
   getTicketById(id: number): Observable<Ticket> {
     const url = `${this.baseURL}/incident/${id}`;
