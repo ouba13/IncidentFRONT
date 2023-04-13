@@ -26,6 +26,7 @@ export class SignupComponent implements OnInit {
       last_name: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['', Validators.required],
       confirmPassword: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(6),
@@ -72,11 +73,12 @@ export class SignupComponent implements OnInit {
         lastname: this.registerForm.value.last_name,
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
-        role: 'USER'
+        role:this.registerForm.value.role
       };
       this.authser.addUser(user).subscribe(
         (data) => {
           //console.log(data);
+          console.log(this.registerForm.value.role);
           Swal.fire(
             'Good job!',
             'Registration Done Successfully, check email to verify your account.',

@@ -48,6 +48,18 @@
           <p-button icon="pi pi-eye-slash" class="btn-toggle-password" styleClass="p-button-rounded p-button-text shadow-none" *ngIf="showConPassword" (click)="togglePasswordVisibilityCon()"></p-button>
       </div>
 
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role" name="role" required formControlName="role" [ngClass]="{'is-invalid': registerForm.get('role')?.invalid && registerForm.get('role')?.touched}">
+          <option value="" disabled selected>Select a role</option>
+          <option value="declarant">Declarant</option>
+          <option value="assigned">Assigned</option>
+        </select>
+        <div class="vald" *ngIf="registerForm.get('role')?.errors?.['required']">Role is required.</div>
+      </div>
+      
+      
+
       <button class="register-btn" type="submit" [disabled]="!registerForm.valid">Register</button>
     </form>
     <p class="register-text">Already have an account? <a (click)="navigateToTarget()">Login here</a></p>
