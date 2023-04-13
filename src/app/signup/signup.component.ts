@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../authService/auth.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 
@@ -34,37 +34,26 @@ export class SignupComponent implements OnInit {
       ]))
 
     });
+
+    console.log(this.authser.getRoles().subscribe(
+      data=>{
+        console.log(data)
+      }
+    ))
   }
-  matchOtherValidator(otherControlName: string) {
-    let thisControl: FormControl;
-    let otherControl: FormControl;
-
-    return function matchOtherValidate(control: FormControl) {
-      if (!control.parent) {
-        return null;
-      }
-
-      if (!thisControl) {
-        thisControl = control;
-        otherControl = control.parent.get(otherControlName) as FormControl;
-        otherControl.valueChanges.subscribe(() => {
-          thisControl.updateValueAndValidity();
-        });
-      }
-
+  matchOtherValidator(otherControlName: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const otherControl = control.parent?.get(otherControlName);
       if (!otherControl) {
         return null;
       }
-
-      if (otherControl.value !== thisControl.value) {
-        return {
-          matchOther: true
-        };
+      if (control.value !== otherControl.value) {
+        return { matchOther: true };
       }
-
       return null;
     };
   }
+
 
   onRegisterSubmit(): void {
     if (this.registerForm.valid) {
@@ -112,6 +101,11 @@ export class SignupComponent implements OnInit {
   navigateToTarget() {
     this.router.navigate(['/login']);
   }
+
+  getRoles(){
+    console.log(this.authser.getRoles())
+  }
+
 
   // onSubmit(){
   //   this.userservice.addUser(this.user).subscribe(

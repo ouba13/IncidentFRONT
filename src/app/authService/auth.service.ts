@@ -71,6 +71,10 @@ export class AuthService {
     return this.httpClient.post<any>(`${this.baseURL}/resetPassword`,{email,token,password})
   }
 
+  getRoles():Observable<any>{
+    return this.httpClient.get<any>(`http://localhost:8080/api/v1/user/allRoles`)
+  }
+
 
 
 }
