@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ticket } from '../ticket';
@@ -11,8 +11,10 @@ export class TicketService {
   private baseURL="http://localhost:8080/api/v1/incident";
   constructor(private httpClient : HttpClient) { }
 
+  private headers = new HttpHeaders({'Content-Type':'application/json','Access-Control-Allow-Origin':'*'})
+
   getTicketsList(): Observable<Ticket[]>{
-    return this.httpClient.get<Ticket[]>(`${this.baseURL}/incidents`) ;
+    return this.httpClient.get<Ticket[]>(`${this.baseURL}/incidents`,{headers:this.headers}) ;
   }
 
   createTicket(ticket:Ticket): Observable<Ticket[]>{
