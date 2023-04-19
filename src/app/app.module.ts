@@ -6,7 +6,7 @@ import {TableModule} from 'primeng/table';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
@@ -25,13 +25,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { DialogModule } from 'primeng/dialog';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RestCodeComponent } from './rest-code/rest-code.component';
+import { AuthService } from './authService/auth.service';
+import { AuthGuard } from './guard/application-guard.service';
+import { InterceptorService } from './interceptor/interceptor.service';
 
 
 
 
 
 
- 
+
 
 @NgModule({
   declarations: [
@@ -45,7 +48,7 @@ import { RestCodeComponent } from './rest-code/rest-code.component';
     LoginComponent,
     ResetPasswordComponent,
     RestCodeComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -66,14 +69,12 @@ import { RestCodeComponent } from './rest-code/rest-code.component';
     MatSnackBarModule,
     MatFormFieldModule,
     DialogModule
-    
- 
-    
-    
-    
-    
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    {provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

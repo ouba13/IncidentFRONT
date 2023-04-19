@@ -2,20 +2,26 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ticket } from '../ticket';
+import { AuthService } from '../authService/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
 
-  private baseURL="http://localhost:8080/api/v1/incident";
-  constructor(private httpClient : HttpClient) { }
 
-  private headers = new HttpHeaders({'Content-Type':'application/json','Access-Control-Allow-Origin':'*'})
+  private baseURL="http://localhost:8080/api/v1/incident";
+  constructor(private httpClient : HttpClient,private auth: AuthService) {}
+
+
+  //private headers = new HttpHeaders({'Content-Type':'application/json','Access-Control-Allow-Origin':'*'})
+  private headers = new HttpHeaders({Authorization: `Bearer `+this.auth.getToken()})
+
 
   getTicketsList(): Observable<Ticket[]>{
     return this.httpClient.get<Ticket[]>(`${this.baseURL}/incidents`,{headers:this.headers}) ;
   }
+
 
   createTicket(ticket:Ticket): Observable<Ticket[]>{
     return this.httpClient.post<Ticket[]>(`${this.baseURL}/addIncident`,ticket) ;
@@ -32,12 +38,13 @@ export class TicketService {
   }
 
   getUsers(user:any) {
-    return this.httpClient.get<any>("http://localhost:8080/searchByUser?firstName="+user).toPromise() ;
+    return this.httpClient.get<any>("http://localhost:8080/api/v1/user/searchByUser?firstName="+user).toPromise() ;
   }
 
   getAssigned(user:any) {
-    return this.httpClient.get<any>("http://localhost:8080/searchByAdmin?firstName="+user).toPromise() ;
+    return this.httpClient.get<any>("http://localhost:8080/api/v1/searchByAdmin?firstName="+user).toPromise() ;
   }
+
 
 
   // submitForm(form: any) {
@@ -50,6 +57,6 @@ export class TicketService {
   // }
 
   search(filter: any) {
-    return this.httpClient.post('http://localhost:8080/search', filter);
+    return this.httpClient.post('http://localhost:8080/api/v1/user/search', filter);
   }
 }

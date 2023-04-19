@@ -10,10 +10,10 @@ import { AuthGuard } from './guard/application-guard.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RestCodeComponent } from './rest-code/rest-code.component';
 const routes: Routes = [
-{ path : 'ticketInfo/:id', component : TicketDetailComponent,canActivate:[AuthGuard]},
-{ path : '', component : TicketListComponent,canActivate:[AuthGuard]},
-{ path : 'ajoutTicket', component : AddTicketComponent,canActivate:[AuthGuard]},
-{ path : 'updateTicket/:id', component : UpdateTicketComponent,canActivate:[AuthGuard]},
+{ path : 'ticketInfo/:id', component : TicketDetailComponent},
+{ path : '', component : TicketListComponent},
+{ path : 'ajoutTicket', component : AddTicketComponent},
+{ path : 'updateTicket/:id', component : UpdateTicketComponent},
 { path : 'login', component : LoginComponent},
 { path : 'sign', component : SignupComponent},
 { path : 'resetPassword', component : ResetPasswordComponent},

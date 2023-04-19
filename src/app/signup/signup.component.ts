@@ -56,6 +56,7 @@ export class SignupComponent implements OnInit {
 
 
   onRegisterSubmit(): void {
+    console.log('1')
     if (this.registerForm.valid) {
       const user = {
         firstname: this.registerForm.value.first_name,
@@ -66,8 +67,7 @@ export class SignupComponent implements OnInit {
       };
       this.authser.addUser(user).subscribe(
         (data) => {
-          //console.log(data);
-          console.log(this.registerForm.value.role);
+          console.log('2')
           Swal.fire(
             'Good job!',
             'Registration Done Successfully, check email to verify your account.',
@@ -76,6 +76,7 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/login']); // Redirect to login page
         },
         (error) => {
+          console.log('3')
           console.log(error);
           Swal.fire({
             icon: 'error',
@@ -85,6 +86,7 @@ export class SignupComponent implements OnInit {
         }
       );
     } else {
+      console.log('4')
       alert('Please fill in all required fields.');
     }
   }

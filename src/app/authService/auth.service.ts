@@ -7,9 +7,10 @@ import { Observable, map } from 'rxjs';
 })
 export class AuthService {
   private baseURL = "http://localhost:8080/api/v1/auth";
-  constructor(private httpClient: HttpClient) { } 
+  constructor(private httpClient: HttpClient) { }
 
   public addUser(user: any) {
+    console.log(user)
     return this.httpClient.post(`${this.baseURL}/register`, user);
   }
 
