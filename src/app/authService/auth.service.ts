@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
@@ -7,10 +7,20 @@ import { Observable, map } from 'rxjs';
 })
 export class AuthService {
   private baseURL = "http://localhost:8080/api/v1/auth";
+
   constructor(private httpClient: HttpClient) { }
+  private headers = new HttpHeaders({Authorization: `Bearer `+this.getToken()})
+
 
   public addUser(user: any) {
     console.log(user)
+    const token = localStorage.getItem('authToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
     return this.httpClient.post(`${this.baseURL}/register`, user);
   }
 
@@ -18,6 +28,7 @@ export class AuthService {
   public TokenUser(loginData: any) {
     return this.httpClient.post(`${this.baseURL}/authenticate`, loginData);
   }
+
   public loginUser(token: any) {
     localStorage.setItem("token", token)
 
@@ -29,7 +40,7 @@ export class AuthService {
   }
 
   public logout() {
-    localStorage.removeItem('token');
+
     localStorage.removeItem('user');
 
   }
@@ -73,7 +84,7 @@ export class AuthService {
   }
 
   getRoles():Observable<any>{
-    return this.httpClient.get<any>(`http://localhost:8080/api/v1/user/allRoles`)
+    return this.httpClient.get<any>(`http://localhost:8080/api/v1/user/allRoles`,{headers:this.headers})
   }
 
 

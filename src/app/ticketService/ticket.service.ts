@@ -24,25 +24,25 @@ export class TicketService {
 
 
   createTicket(ticket:Ticket): Observable<Ticket[]>{
-    return this.httpClient.post<Ticket[]>(`${this.baseURL}/addIncident`,ticket) ;
+    return this.httpClient.post<Ticket[]>(`${this.baseURL}/addIncident`,ticket,{headers:this.headers}) ;
   }
 
   updateTicket(id: number, ticket: any): Observable<Ticket> {
-    return this.httpClient.put<Ticket>(`${this.baseURL}/incidents/${id}`, ticket);
+    return this.httpClient.put<Ticket>(`${this.baseURL}/incidents/${id}`, ticket,{headers:this.headers});
   }
 
 
   getTicketById(id: number): Observable<Ticket> {
     const url = `${this.baseURL}/incident/${id}`;
-    return this.httpClient.get<Ticket>(url);
+    return this.httpClient.get<Ticket>(url,{headers:this.headers});
   }
 
   getUsers(user:any) {
-    return this.httpClient.get<any>("http://localhost:8080/api/v1/user/searchByUser?firstName="+user).toPromise() ;
+    return this.httpClient.get<any>("http://localhost:8080/api/v1/user/searchByUser?firstName="+user,{headers:this.headers}).toPromise() ;
   }
 
   getAssigned(user:any) {
-    return this.httpClient.get<any>("http://localhost:8080/api/v1/searchByAdmin?firstName="+user).toPromise() ;
+    return this.httpClient.get<any>("http://localhost:8080/api/v1/user/searchByAdmin?firstName="+user,{headers:this.headers}).toPromise() ;
   }
 
 
@@ -57,6 +57,6 @@ export class TicketService {
   // }
 
   search(filter: any) {
-    return this.httpClient.post('http://localhost:8080/api/v1/user/search', filter);
+    return this.httpClient.post('http://localhost:8080/api/v1/incident/search', filter,{headers:this.headers});
   }
 }

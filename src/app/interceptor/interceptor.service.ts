@@ -10,7 +10,7 @@ export class InterceptorService {
 
 
   constructor(private authService : AuthService) { }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  /*intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // check if the request URL is the login endpoint
     if (req.url.includes('/api/v1/auth')) {
       // do not add the token to the headers for the login request
@@ -21,5 +21,5 @@ export class InterceptorService {
           headers:req.headers.set("Authorization", "Bearer "+this.authService.getToken())
         })
         return next.handle(req);
-  }
+  }*/
 }

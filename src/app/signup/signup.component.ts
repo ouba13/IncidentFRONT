@@ -35,11 +35,7 @@ export class SignupComponent implements OnInit {
 
     });
 
-    console.log(this.authser.getRoles().subscribe(
-      data=>{
-        console.log(data)
-      }
-    ))
+
   }
   matchOtherValidator(otherControlName: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -67,23 +63,23 @@ export class SignupComponent implements OnInit {
       };
       this.authser.addUser(user).subscribe(
         (data) => {
-          console.log('2')
+          console.log(data)
           Swal.fire(
             'Good job!',
             'Registration Done Successfully, check email to verify your account.',
             'success'
-          )
+          );
           this.router.navigate(['/login']); // Redirect to login page
         },
         (error) => {
-          console.log('3')
-          console.log(error);
+          console.log('Error occurred: ', error);
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Check the fields please'
-          })
+            text: 'An error occurred. Please try again later.'
+          });
         }
+
       );
     } else {
       console.log('4')

@@ -15,6 +15,7 @@ import { AuthService } from '../authService/auth.service';
 export class TicketListComponent implements OnInit {
   Tickets!: any;
   ticketSearched !: Ticket[];
+  roles: string[] = [];
 
   first = 0;
   rows = 10;
@@ -31,11 +32,9 @@ export class TicketListComponent implements OnInit {
   resultsAssign!: any[];
   submitForm() {
     let filter: any = {where:[]};
-
     if (this.dateInputValue != "") {
       filter.where.push({
         field: 'creationdate',
-        operator: '=',
         modalities: [this.dateInputValue]
       });
     }
@@ -43,31 +42,33 @@ export class TicketListComponent implements OnInit {
     if (this.declarantInputValue != "") {
       filter.where.push({
         field: 'declarant',
-        operator: '=',
-        modalities: [this.declarantInputValue.firstName]
+        modalities: [this.declarantInputValue.firstname]
       });
     }
 
     if (this.assignerInputValue != "") {
       filter.where.push({
         field: 'assigne',
-        operator: '=',
-        modalities: [this.assignerInputValue.firstName]
+        modalities: [this.assignerInputValue.firstname]
       });
     }
 
     if (this.statusSelectValue != "") {
       filter.where.push({
         field: 'status',
-        operator: '=',
         modalities: [this.statusSelectValue]
       });
     }
 
     console.log(filter)
     this.ticketService.search(filter).subscribe(
-      data => this.Tickets = data,
-      error => console.error(error)
+      data =>{
+        this.Tickets = data,
+        console.log(data)
+      },
+      error =>{
+      console.log(error)
+    }
     );
   }
 
@@ -81,23 +82,24 @@ export class TicketListComponent implements OnInit {
   searchAssign(event: any) {
     this.ticketService.getAssigned(event.query).then(data => {
       this.resultsAssign = data;
+      console.log(data)
     });
   }
 
 
 
   select(event: any) {
-    this.text = event.user_id;
+    console.log(event)
+    this.text = event.id;
   }
 
   selectAssign(event: any) {
-    this.textAssign = event.user_id;
+    console.log(event)
+    this.textAssign = event.id;
   }
 
   ngOnInit(): void {
     this.getTickets();
-
-
   }
 
 
@@ -163,8 +165,11 @@ export class TicketListComponent implements OnInit {
 
   logout() {
     this.authser.logout();
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
+    location.reload();
   }
+
 
 
 

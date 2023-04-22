@@ -73,7 +73,7 @@ import { InterceptorService } from './interceptor/interceptor.service';
   providers: [
     AuthService,
     AuthGuard,
-    {provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}
+    //{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}
   ],
   bootstrap: [AppComponent]
 })
