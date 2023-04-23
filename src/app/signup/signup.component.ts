@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
   registerForm!: FormGroup;
   showPassword=true;
   showConPassword=true;
+  roles: any[] = [];
 
   constructor(private router: Router, private formBuilder: FormBuilder, private authser: AuthService) { }
 
@@ -34,7 +35,7 @@ export class SignupComponent implements OnInit {
       ]))
 
     });
-
+    this.getRoles();
 
   }
   matchOtherValidator(otherControlName: string): ValidatorFn {
@@ -52,7 +53,6 @@ export class SignupComponent implements OnInit {
 
 
   onRegisterSubmit(): void {
-    console.log('1')
     if (this.registerForm.valid) {
       const user = {
         firstname: this.registerForm.value.first_name,
@@ -101,13 +101,12 @@ export class SignupComponent implements OnInit {
   }
 
   getRoles(){
-    console.log(this.authser.getRoles())
+    this.authser.getRoles().subscribe(
+      data=>{
+        this.roles = data
+      }
+    )
   }
 
 
-  // onSubmit(){
-  //   this.userservice.addUser(this.user).subscribe(
-  //     (data)=>
-  //   );
-  // }
 }

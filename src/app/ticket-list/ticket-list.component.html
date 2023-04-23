@@ -24,9 +24,9 @@
         <div class="col-sm-3">
           <label for="status-select" class="col-form-label">Status:</label>
           <div class="input-group">
-            <select class="form-control" id="status-select" [(ngModel)]="statusSelectValue" name="statusSelect">
-              <option *ngFor="let role of roles" >{{role}}</option>
-
+            <select class="form-control" id="status-select" name="statusSelect"  [(ngModel)]="statusSelectValue">
+              <option value="" disabled selected>Select a status</option>
+              <option *ngFor="let statu of status">{{statu.label}}</option>
             </select>
           </div>
         </div>

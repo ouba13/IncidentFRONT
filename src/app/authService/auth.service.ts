@@ -13,14 +13,6 @@ export class AuthService {
 
 
   public addUser(user: any) {
-    console.log(user)
-    const token = localStorage.getItem('authToken');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      })
-    };
     return this.httpClient.post(`${this.baseURL}/register`, user);
   }
 
@@ -84,7 +76,11 @@ export class AuthService {
   }
 
   getRoles():Observable<any>{
-    return this.httpClient.get<any>(`http://localhost:8080/api/v1/user/allRoles`,{headers:this.headers})
+    return this.httpClient.get<any>(`http://localhost:8080/api/v1/auth/allRoles`)
+  }
+
+  getStaus():Observable<any>{
+    return this.httpClient.get<any>(`http://localhost:8080/api/v1/auth/allStatus`)
   }
 
 

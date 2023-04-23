@@ -15,7 +15,7 @@ import { AuthService } from '../authService/auth.service';
 export class TicketListComponent implements OnInit {
   Tickets!: any;
   ticketSearched !: Ticket[];
-  roles: string[] = [];
+  status: any[] = [];
 
   first = 0;
   rows = 10;
@@ -100,6 +100,7 @@ export class TicketListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTickets();
+    this.getStatus()
   }
 
 
@@ -168,6 +169,14 @@ export class TicketListComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
     location.reload();
+  }
+
+  getStatus(){
+    this.authser.getStaus().subscribe(
+      data =>{
+        this.status = data
+      }
+    )
   }
 
 

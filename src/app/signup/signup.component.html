@@ -7,15 +7,18 @@
         <div class="form-group col">
           <label for="first_name">First Name</label>
           <input type="text" id="first_name" name="first_name" required formControlName="first_name" [ngClass]="{'is-invalid': registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched}">
-            <div class="vald" *ngIf="registerForm.get('first_name')?.errors?.['required']">First Name is required.</div>
-            <div class="vald" *ngIf="registerForm.get('first_name')?.errors?.['minlength']">First Name Too short.</div>
+
+          <div class="vald" *ngIf="registerForm.get('first_name')?.errors?.['required']">Firstname is required.</div>
+            <div class="vald" *ngIf="registerForm.get('first_name')?.errors?.['minlength']">Firstname Too short.</div>
+        
         </div>
 
         <div class="form-group col">
           <label for="lastName">Last Name</label>
           <input type="text" id="last_name" name="lastName" required minlength="4" formControlName="last_name" [ngClass]="{'is-invalid': registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched}">
-          <div class="vald" *ngIf="registerForm.get('last_name')?.errors?.['required']">Last Name is required.</div>
-          <div class="vald" *ngIf="registerForm.get('last_name')?.errors?.['minlength']">Last Name Too Short.</div>
+
+          <div class="vald" *ngIf="registerForm.get('last_name')?.errors?.['required']">Lastname is required.</div>
+          <div class="vald" *ngIf="registerForm.get('last_name')?.errors?.['minlength']">Lastname Too Short.</div>
         </div>
       </div>
       <div class="form-group">
@@ -23,7 +26,7 @@
         <input type="email" id="email" name="email" required [ngClass]="{'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}" formControlName="email">
             <div class="vald" *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
             <div class="vald" *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div>
-      </div>  
+      </div>
 
       <div class="form-group position-relative">
         <label for="password">Password</label>
@@ -52,13 +55,12 @@
         <label for="role">Role</label>
         <select id="role" name="role" required formControlName="role" [ngClass]="{'is-invalid': registerForm.get('role')?.invalid && registerForm.get('role')?.touched}">
           <option value="" disabled selected>Select a role</option>
-          <option value="declarant">Declarant</option>
-          <option value="assigned">Assigned</option>
+          <option *ngFor="let role of roles">{{role.label}}</option>
         </select>
         <div class="vald" *ngIf="registerForm.get('role')?.errors?.['required']">Role is required.</div>
       </div>
-      
-      
+
+
 
       <button class="register-btn" type="submit" [disabled]="!registerForm.valid">Register</button>
     </form>

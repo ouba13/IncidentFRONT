@@ -29,7 +29,6 @@ export class LoginComponent {
 
 
   onLoginSubmit(): void {
-    console.log(this.loginForm.value.email)
     if (this.loginForm.valid) {
       const user = {
         email: this.loginForm.value.email,
@@ -45,7 +44,6 @@ export class LoginComponent {
               'success'
             )
             this.router.navigate(['/']);
-            //console.log(data.token);
           }
           else {
             Swal.fire({
