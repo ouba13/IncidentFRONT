@@ -33,7 +33,7 @@ export class TicketService {
 
 
   getTicketById(id: number): Observable<Ticket> {
-    const url = `${this.baseURL}/incident/${id}`;
+    const url = `${this.baseURL}/getincident/${id}`;
     return this.httpClient.get<Ticket>(url,{headers:this.headers});
   }
 

@@ -19,12 +19,12 @@
           <hr>
           <div class="row">
             <div class="col-4 font-weight-bold">Assigned to:</div>
-            <div class="col-8">{{ticket.assigne.firstName}} {{ticket.assigne.lastName}}</div>
+            <div class="col-8">{{ticket.assigne.firstname}} {{ticket.assigne.lastname}}</div>
           </div>
           <hr>
           <div class="row">
             <div class="col-4 font-weight-bold">Reported by:</div>
-            <div class="col-8">{{ticket.declarant.firstName}} {{ticket.declarant.lastName}}</div>
+            <div class="col-8">{{ticket.declarant.firstname}} {{ticket.declarant.lastname}}</div>
           </div>
           <hr>
           <div class="row">
@@ -36,9 +36,9 @@
             <div class="col-4 font-weight-bold">Status:</div>
             <div class="col-8">
               <div class="badge rounded-pill"
-                   [ngClass]="{'badge-secondary': ticket.status.label === 'enCour',
-                               'badge-success': ticket.status.label === 'terminer',
-                               'badge-danger': ticket.status.label === 'declancher'}">
+                   [ngClass]="{'badge-secondary': ticket.status.label === 'EnCour',
+                               'badge-success': ticket.status.label === 'Terminer',
+                               'badge-danger': ticket.status.label === 'Declancher'}">
                 {{ticket.status.label}}
               </div>
             </div>

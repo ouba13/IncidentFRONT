@@ -2,8 +2,8 @@
 
 export class User {
     
-firstName!:String;
-lastName!:String;
+firstname!:String;
+lastname!:String;
 user_id!:number;
 role!:String;
 

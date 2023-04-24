@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ticket } from '../ticket';
 import { TicketService } from '../ticketService/ticket.service';
+import { AuthService } from '../authService/auth.service';
 
  
 
@@ -13,47 +14,35 @@ import { TicketService } from '../ticketService/ticket.service';
 export class UpdateTicketComponent {
 
   id!: number;
-  //ticket: Ticket = new Ticket() ;
   statusList!:any;
-  xxx="";
   ticket:any;
+  status!: any[] ;
+  selectedStatusId!: number;
 
-  constructor(private ticketService: TicketService,private router: Router,private rt: ActivatedRoute ){}
+  constructor(private ticketService: TicketService,private router: Router,private rt: ActivatedRoute,private authser:AuthService ){}
 
   ngOnInit() : void{
  
-    this.ticket={
-      id:0,
-      libelle : "",
-      assigne: {  firstName:"",lastName:"" },
-      declarant: "",
-      status :"" ,
-      creationdate : ""  
-    }
-    
-    this.statusList=[
-      {status_id:1,label:'enCour'},
-      {status_id:2,label:'terminer'},
-      {status_id:3,label:'declancher'}
-    ]
-
+    // this.ticket={
+    //   id:0,
+    //   libelle : "",
+    //   assigne: {  firstName:"",lastName:"" },
+    //   declarant: "",
+    //   status :"" ,
+    //   creationdate : ""  
+    // }
+    this.getStatus();
     this.id = this.rt.snapshot.params['id'];
     this.ticketService.getTicketById(this.id).subscribe(data => {
       this.ticket =data ;
-      //this.ticket.status={status_id:3,label:'declancher'};
-
-      console.log(this.ticket);
-      console.log(this.ticket.status);
     },error => console.log(error)) ;
+
+    
   }
   
 
   updateTicket(){
-    console.log(this.ticket);
- 
     this.ticketService.updateTicket(this.id,this.ticket).subscribe(data => {
-      console.log(data);
-      //this.ticket = new Ticket();
       this.goToTickeList();
     },error => console.log(error)) ;
   }
@@ -67,6 +56,15 @@ export class UpdateTicketComponent {
 
   navigateToTicketList(){
     this.router.navigate(['']);
+  }
+  
+  getStatus(){
+    this.authser.getStaus().subscribe(
+      data =>{
+        this.status = data;
+        
+      }
+    )
   }
 
 }

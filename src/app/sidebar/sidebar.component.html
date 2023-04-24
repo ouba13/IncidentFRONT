@@ -1,9 +1,28 @@
-<p-sidebar [(visible)]="sidebarVisible" class="side">
-  <h3>Sidebar</h3>
-  <span class="pi pi-users" style="font-size: 2.5rem; margin-top: 40px;">Users</span><br><br>
-  <span class="pi pi-chart-bar" style="font-size: 2.5rem; margin-top: 40px;">Statistics</span><br><br>
-  <span class="pi pi-chart-bar" style="font-size: 2.5rem; margin-top: 40px;">Incidents</span><br><br>
-  <span class="pi pi-chart-bar" style="font-size: 2.5rem; margin-top: 40px;">Reporting</span>
-  <span class="pi pi-amazon" style="font-size: 2.5rem; margin-top: 40px;">Amazon</span>
+<p-sidebar [(visible)]="sidebarVisible" class="sidebar"  id="my-sidebar">
+  <div class="sidebar-header">
+    <img class="login-img" src="../../assets/fs.jpg" alt="Login Image" style="margin-top: -64px;">
+  </div>
+  <a class="sidebar-item" routerLink="/incidents">
+    <i class="pi pi-chart-line"></i>
+    <span>Incidents</span>
+  </a>
+  <a class="sidebar-item" routerLink="/statistics">
+    <i class="pi pi-chart-bar"></i>
+    <span>Statistics</span>
+  </a>
+  <a class="sidebar-item" routerLink="/reporting">
+    <i class="pi pi-cloud-download"></i>
+    <span>Reporting</span>
+  </a>
+  <div class="sidebar-content">
+    <a class="sidebar-item" routerLink="/users">
+      <i class="pi pi-users"></i>
+      <span>Users</span>
+    </a>
+    <a class="sidebar-item" (click)="logout()" style="margin-left: 60px;">
+      <i class="pi pi-power-off"></i>
+      <span>LogOut</span>
+    </a>
+  </div>
 </p-sidebar>
-<p-button (click)="sidebarVisible = true" icon="pi pi-arrow-right"></p-button>
+<p-button (click)="sidebarVisible = true" icon="pi pi-bars" class="sidebar-toggle"></p-button>

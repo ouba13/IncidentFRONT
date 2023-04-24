@@ -10,12 +10,12 @@ import { TicketService } from '../ticketService/ticket.service';
 })
 export class AddTicketComponent {
   constructor(private router: Router,private ticketService: TicketService ) {}
-  ticket: Ticket = new Ticket();
+  ticket:any;
 
 
   onSubmit(){
     console.log(this.ticket);
-    this.saveTicket();
+    //this.saveTicket();
   }
 
 

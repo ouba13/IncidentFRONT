@@ -2,50 +2,47 @@
 <div class="d-flex justify-content-center mt-3">
     <div class="card shadow-lg w-75">
       <div class="card-body">
-        <h3 class="text-center mb-4">Update Incident</h3>
+        <h3 class="text-center mb-4" style="font-size: 30px;font-weight: bolder;  ">Update Incident</h3>
            <div class="form-group">
-            <label for="descri" class="mb-2" style="font-size: 20px; ">Description de L'incident</label>
-            <input type="text" class="form-control form-control-lg" id="descri" [(ngModel)]="ticket.libelle" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
+            <label for="descri" class="mb-2" style="font-size: 20px;font-weight: bold;  ">Description de L'incident</label>
+            <input type="text" class="form-control form-control-lg" id="descri"  [(ngModel)]="ticket.libelle" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
           </div>
-  
-          <div class="form-group">
-            <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné A first name</label>
-            <input type="text" class="form-control form-control-lg" id="assigne" [(ngModel)]="ticket.assigne.firstName" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné A first name</label>
+              <input type="text" class="form-control form-control-lg" id="assigne" [(ngModel)]="ticket.assigne.firstname" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
+            </div>
+            <div class="form-group col">
+              <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné A lastname</label>
+              <input type="text" class="form-control form-control-lg" id="assigne" [(ngModel)]="ticket.assigne.lastname" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné A lastname</label>
-            <input type="text" class="form-control form-control-lg" id="assigne" [(ngModel)]="ticket.assigne.lastName" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant</label>
+              <input type="text" class="form-control form-control-lg" id="declarant" [(ngModel)]="ticket.declarant.firstname" [ngModelOptions]="{standalone: true}" style="font-size: 18px;"> 
+            </div>
+            <div class="form-group col">
+              <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant lastName</label>
+              <input type="text" class="form-control form-control-lg" id="declarant" [(ngModel)]="ticket.declarant.lastname" [ngModelOptions]="{standalone: true}" style="font-size: 18px;"> 
+            </div>
           </div>
-  
-          <div class="form-group">
-            <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant</label>
-            <input type="text" class="form-control form-control-lg" id="declarant" [(ngModel)]="ticket.declarant.firstName" [ngModelOptions]="{standalone: true}" style="font-size: 18px;"> 
-          </div>
-          <div class="form-group">
-            <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant lastName</label>
-            <input type="text" class="form-control form-control-lg" id="declarant" [(ngModel)]="ticket.declarant.lastName" [ngModelOptions]="{standalone: true}" style="font-size: 18px;"> 
-          </div>
-  
           <div class="form-group">
             <label for="date-input" class="mb-2" style="font-size: 20px;">Date de declaration</label>
-            <input type="date" class="form-control form-control-lg" id="date-input" placeholder="Enter date" [(ngModel)]="ticket.creationdate" [ngModelOptions]="{standalone: true}" name="dateInput" style="font-size: 18px;">
+            <input type="date" class="form-control form-control-lg" id="date-input" placeholder="Enter date" [(ngModel)]="ticket.creationdate" [ngModelOptions]="{standalone: true}" name="dateInput" style="font-size: 18px;" [disabled]="true">
           </div>
   
           <div class="form-group">
             <label for="status-select" class="mb-2" style="font-size: 20px;">Status de L'incident</label>
- 
-            {{ticket.status.label}}
-            {{ticket.status.status_id}}
-      
-            <p-dropdown [options]="statusList" [(ngModel)]="ticket.status"  optionLabel="label"  ></p-dropdown>
-  
+            
+            <select class="form-control" id="status-select" name="statusSelect">
+              <option *ngFor="let st of status">{{st.label}}</option>
+            </select>
+            
           </div>
+          
           <button class="btn btn-success mt-3" type="submit" style="font-size: 19px;"   (click)="onSubmit()" >Submit</button>
    
       </div>
     </div>
   </div>
-
-  {{ticket.status.label}}
-  {{ticket.status.status_id}}
-  <p-dropdown [options]="statusList" [(ngModel)]="ticket.status"  optionLabel="label"  ></p-dropdown>
