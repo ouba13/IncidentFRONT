@@ -23,12 +23,12 @@ export class TicketService {
   }
 
 
-  createTicket(ticket:Ticket): Observable<Ticket[]>{
-    return this.httpClient.post<Ticket[]>(`${this.baseURL}/addIncident`,ticket,{headers:this.headers}) ;
+  createTicket(ticket:any){
+    return this.httpClient.post(`${this.baseURL}/addIncident`,ticket,{headers:this.headers}) ;
   }
 
-  updateTicket(id: number, ticket: any): Observable<Ticket> {
-    return this.httpClient.put<Ticket>(`${this.baseURL}/incidents/${id}`, ticket,{headers:this.headers});
+  updateTicket(id: number, ticket: any){
+    return this.httpClient.put(`${this.baseURL}/incidents/${id}`, ticket,{headers:this.headers});
   }
 
 

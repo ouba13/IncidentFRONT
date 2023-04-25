@@ -4,7 +4,7 @@ import { Ticket } from '../ticket';
 import { TicketService } from '../ticketService/ticket.service';
 import { AuthService } from '../authService/auth.service';
 
- 
+
 
 @Component({
   selector: 'app-update-ticket',
@@ -19,31 +19,29 @@ export class UpdateTicketComponent {
   status!: any[] ;
   selectedStatusId!: number;
 
+  results!: any;
+  resultsAssign!: any[];
+  textAssign = "";
+  text = "";
+
   constructor(private ticketService: TicketService,private router: Router,private rt: ActivatedRoute,private authser:AuthService ){}
 
   ngOnInit() : void{
- 
-    // this.ticket={
-    //   id:0,
-    //   libelle : "",
-    //   assigne: {  firstName:"",lastName:"" },
-    //   declarant: "",
-    //   status :"" ,
-    //   creationdate : ""  
-    // }
+
     this.getStatus();
     this.id = this.rt.snapshot.params['id'];
     this.ticketService.getTicketById(this.id).subscribe(data => {
       this.ticket =data ;
     },error => console.log(error)) ;
 
-    
+
   }
-  
+
 
   updateTicket(){
     this.ticketService.updateTicket(this.id,this.ticket).subscribe(data => {
       this.goToTickeList();
+      console.log(data)
     },error => console.log(error)) ;
   }
 
@@ -57,14 +55,37 @@ export class UpdateTicketComponent {
   navigateToTicketList(){
     this.router.navigate(['']);
   }
-  
+
   getStatus(){
     this.authser.getStaus().subscribe(
       data =>{
         this.status = data;
-        
+
       }
     )
   }
 
+  searchAssign(event: any) {
+    this.ticketService.getAssigned(event.query).then(data => {
+      this.resultsAssign = data;
+      console.log(data)
+    });
+  }
+
+  selectAssign(event: any) {
+    console.log(event)
+    this.textAssign = event.id;
+  }
+
+
+select(event: any) {
+    console.log(event)
+    this.text = event.id;
+  }
+
+  search(event: any) {
+    this.ticketService.getUsers(event.query).then(data => {
+      this.results = data;
+    });
+  }
 }

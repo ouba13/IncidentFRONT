@@ -12,7 +12,8 @@
           <label for="input-field1" class="col-form-label">Declarant</label>
           <p-autoComplete class="autocomplete-input  testo" [forceSelection]="true" (onSelect)="select($event)"
             placeholder="Nom du Declarant" field="firstname" [suggestions]="results" (completeMethod)="search($event)"
-            [(ngModel)]="declarantInputValue" name="declarantInput"></p-autoComplete>
+            [(ngModel)]="declarantInputValue" name="declarantInput">
+          </p-autoComplete>
         </div>
         <div class="col-sm-3">
           <label for="input-field2" class="col-form-label">Assigner à</label>

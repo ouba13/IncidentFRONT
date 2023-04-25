@@ -1,53 +1,53 @@
 <i class="pi pi-arrow-left" style="font-size: 2.3rem; margin-top: 30px; margin-left: 20px;" (click)="navigateToTicketList()"></i>
 <div class="d-flex justify-content-center mt-3">
-    <div class="card shadow-lg w-75">
-      <div class="card-body">
-        <h3 class="text-center mb-4">Nouveau Incident</h3>
-        <form (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="descri" class="mb-2" style="font-size: 20px; ">Description de L'incident</label>
-            <input type="text" class="form-control form-control-lg" id="descri" [(ngModel)]="ticket.libelle" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
-          </div>
-  
-          <div class="form-group">
-            <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné A</label>
-            <div class="row">
-              <div class="col">
-                <input type="text" class="form-control form-control-lg" id="assigne" [(ngModel)]="ticket.assigne.firstname" placeholder="First Name " [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
-              </div>
-              <div class="col">
-                <input type="text" class="form-control form-control-lg" id="assignelastName" [(ngModel)]="ticket.assigne.lastname" placeholder="Last Name  " [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
-              </div>
+  <div class="card shadow-lg w-75">
+    <div class="card-body">
+      <h3 class="text-center mb-4">Nouveau Incident</h3>
+
+      <form (submit)="saveTicket()" [formGroup]="registerForm">
+        <div class="form-group">
+          <label for="descri" class="mb-2" style="font-size: 20px;">Description de L'incident</label>
+          <input type="text" class="form-control form-control-lg" id="libelle" formControlName="libelle" name="libelle" style="font-size: 18px;">
+        </div>
+
+        <div class="form-group">
+          <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné A</label>
+          <div class="row">
+            <div class="col">
+              <p-autoComplete class="form-control form-control-lg" [forceSelection]="true" (onSelect)="selectAssign($event)"
+              placeholder="Assingne name" field="firstname" [suggestions]="results" (completeMethod)="searchAssign($event) "
+            formControlName="assigne" name="assigne.firstname" id="assigne" >
+          </p-autoComplete>
             </div>
           </div>
-  
-          <div class="form-group">
-            <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant</label>
-            <div class="row">
-              <div class="col">
-                <input type="text" class="form-control form-control-lg" id="declarant" [(ngModel)]="ticket.declarant.firstname" placeholder="First Name" [ngModelOptions]="{standalone: true}" style="font-size: 18px;"> 
-              </div>
-              <div class="col">
-                <input type="text" class="form-control form-control-lg" id="declarantlastName" [(ngModel)]="ticket.declarant.lastname" placeholder="Last Name" [ngModelOptions]="{standalone: true}" style="font-size: 18px;"> 
-              </div>
+        </div>
+        <div class="form-group">
+          <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant</label>
+          <div class="row">
+            <div class="col">
+              <p-autoComplete class="form-control form-control-lg" [forceSelection]="true" (onSelect)="select($event)"
+              placeholder="Declarant name" field="firstname" [suggestions]="results" (completeMethod)="search($event) "
+            formControlName="declarant" name="declarant.firstname" id="declarant" >
+          </p-autoComplete>
             </div>
           </div>
-  
-          <div class="form-group">
-            <label for="date-input" class="mb-2" style="font-size: 20px;">Date de declaration</label>
-            <input type="date" class="form-control form-control-lg" id="date-input" placeholder="Enter date" [(ngModel)]="ticket.creationdate" name="dateInput" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
-          </div>
-  
-          <div class="form-group">
-            <label for="status-select" class="mb-2" style="font-size: 20px;">Status de L'incident</label>
-            <select class="form-control form-control-lg" id="status-select" [(ngModel)]="ticket.status.libel" name="statusSelect" [ngModelOptions]="{standalone: true}" style="font-size: 18px;">
-              <option>declancher</option>
-            </select>
-          </div>
-  
-          <button class="btn btn-success mt-3" type="submit" style="font-size: 19px;">Submit</button>
-        </form>
+        </div>
+
+        <div class="form-group">
+          <label for="date-input" class="mb-2" style="font-size: 20px;">Date de declaration</label>
+          <input type="date" class="form-control form-control-lg" id="creationdate" formControlName="creationdate" name="creationdate" style="font-size: 18px;">
+        </div>
+
+        <div class="form-group">
+          <label for="status-select" class="mb-2" style="font-size: 20px;">Status de L'incident</label>
+          <select class="form-control" id="status-select" formControlName="status" name="status" style="font-size: 18px;">
+            <option value="" disabled selected>Select a status</option>
+            <option *ngFor="let statu of status" [value]="statu.label">{{ statu.label }}</option>
+          </select>
+        </div>
+
+        <button class="btn btn-success mt-3" type="submit" style="font-size: 19px;">Submit</button>
+      </form>
       </div>
     </div>
   </div>
-  
