@@ -14,10 +14,10 @@
           <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné A</label>
           <div class="row">
             <div class="col">
-              <p-autoComplete class="form-control form-control-lg" [forceSelection]="true" (onSelect)="selectAssign($event)"
-              placeholder="Assingne name" field="firstname" [suggestions]="results" (completeMethod)="searchAssign($event) "
-            formControlName="assigne" name="assigne.firstname" id="assigne" >
-          </p-autoComplete>
+              <p-autoComplete class="autocomplete-input test" [forceSelection]="true" (onSelect)="selectAssign($event)"
+              placeholder="Assingne name" field="firstname" [suggestions]="resultsAssign" (completeMethod)="searchAssign($event) "
+              formControlName="assigne" name="assigne" id="assigne" >
+              </p-autoComplete>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
           <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant</label>
           <div class="row">
             <div class="col">
-              <p-autoComplete class="form-control form-control-lg" [forceSelection]="true" (onSelect)="select($event)"
+              <p-autoComplete class="autocomplete-input testo" [forceSelection]="true" (onSelect)="select($event)"
               placeholder="Declarant name" field="firstname" [suggestions]="results" (completeMethod)="search($event) "
             formControlName="declarant" name="declarant.firstname" id="declarant" >
           </p-autoComplete>
@@ -40,7 +40,7 @@
 
         <div class="form-group">
           <label for="status-select" class="mb-2" style="font-size: 20px;">Status de L'incident</label>
-          <select class="form-control" id="status-select" formControlName="status" name="status" style="font-size: 18px;">
+          <select class="form-control" id="status" formControlName="status" name="status" style="font-size: 18px;">
             <option value="" disabled selected>Select a status</option>
             <option *ngFor="let statu of status" [value]="statu.label">{{ statu.label }}</option>
           </select>

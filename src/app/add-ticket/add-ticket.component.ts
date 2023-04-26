@@ -4,6 +4,7 @@ import { Ticket } from '../ticket';
 import { TicketService } from '../ticketService/ticket.service';
 import { AuthService } from '../authService/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Status } from '../Status';
 
 @Component({
   selector: 'app-add-ticket',
@@ -12,9 +13,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddTicketComponent {
   constructor(private router: Router,private ticketService: TicketService,private authser:AuthService ,private formBuilder: FormBuilder) {}
-  //ticket:any;
+  ticket:any;
   registerForm!: FormGroup;
-  status: any[] = [];
+  status: Status[] = [];
   text = "";
   results!: any;
   textAssign = "";
@@ -26,24 +27,41 @@ export class AddTicketComponent {
       assigne: ['', Validators.required],
       declarant: ['', Validators.required],
       creationdate:['', Validators.required],
-      status: ['', Validators.required]
+      status: [Status, Validators.required]
     })
     this.getStatus()
-
 
   }
 
   saveTicket(){
+    var id
     if (this.registerForm.valid) {
-      const ticket = {
+      switch (this.registerForm.value.status) {
+        case "EnCour":
+          id = 1;
+          break;
+        case "Terminer":
+          id = 2;
+          break;
+        case "Declancher":
+          id = 3;
+          break;
+      }
+
+      const statusObject = {
+        status_id: id,
+        label: this.registerForm.value.status
+      };
+      this.ticket = {
         libelle: this.registerForm.value.libelle,
         assigne: this.registerForm.value.assigne,
         declarant: this.registerForm.value.declarant,
         creationdate: this.registerForm.value.creationdate,
-        status:this.registerForm.value.status
+        status:statusObject
     };
-    console.log(ticket)
-    this.ticketService.createTicket(ticket).subscribe(data => {
+
+    console.log(this.ticket)
+    this.ticketService.createTicket(this.ticket).subscribe(data => {
       console.log(data);
       this.goToTickeList();
     },
@@ -59,12 +77,15 @@ export class AddTicketComponent {
     this.router.navigate(['']);
   }
 
+
   getStatus(){
     this.authser.getStaus().subscribe(
       data =>{
         console.log(data)
         this.status = data
+        console.log(this.status)
       }
+
     )
   }
 
