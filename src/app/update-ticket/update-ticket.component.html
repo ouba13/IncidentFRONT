@@ -33,12 +33,10 @@
 
           <div class="form-group">
             <label for="status-select" class="mb-2" style="font-size: 20px;">Status de L'incident</label>
-
-            <select class="form-control" id="status-select" name="status" [(ngModel)]="ticket.status.label">
+            <select class="form-control" id="status-select" name="status" [(ngModel)]="ticket.status">
               <option value="" disabled selected>Select a status</option>
-              <option *ngFor="let st of status" [value]="st">{{st.label}}</option>
-            </select>
-
+              <option *ngFor="let st of status" [ngValue]="st">{{st.label}}</option>
+            </select>                     
           </div>
 
           <button class="btn btn-success mt-3" type="submit" style="font-size: 19px;" >Submit</button>

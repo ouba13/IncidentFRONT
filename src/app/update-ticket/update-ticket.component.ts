@@ -18,7 +18,7 @@ export class UpdateTicketComponent {
 
   id!: number;
   ticket!:Ticket;
-  status!: any[] ;
+  status!: any ;
 
   results!: any;
   resultsAssign!: any[];
@@ -33,7 +33,6 @@ export class UpdateTicketComponent {
     this.id = this.rt.snapshot.params['id'];
     this.ticketService.getTicketById(this.id).subscribe(data => {
       this.ticket =data ;
-      console.log(this.ticket)
     },error => console.log(error)) ;
 
 
@@ -41,11 +40,13 @@ export class UpdateTicketComponent {
 
 
   updateTicket(){
+    this.ticket.status = { status_id: this.ticket.status.status_id, label: this.ticket.status.label };
     this.ticketService.updateTicket(this.id,this.ticket).subscribe(data => {
       this.navigateToTicketList();
       console.log(data)
     },error => console.log(error)) ;
   }
+  
 
 
   navigateToTicketList(){
@@ -64,7 +65,7 @@ export class UpdateTicketComponent {
   searchAssign(event: any) {
     this.ticketService.getAssigned(event.query).then(data => {
       this.resultsAssign = data;
-      console.log(data)
+    
     });
   }
 
