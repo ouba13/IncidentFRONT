@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private baseURL = "http://localhost:8080/api/v1/auth";
+  jwtHelper: any;
+  helper = new JwtHelperService();
+  decodedtoken : any;
 
   constructor(private httpClient: HttpClient) { }
   private headers = new HttpHeaders({Authorization: `Bearer `+this.getToken()})
@@ -17,9 +21,19 @@ export class AuthService {
   }
 
 
-  public TokenUser(loginData: any) {
-    return this.httpClient.post(`${this.baseURL}/authenticate`, loginData);
+  TokenUser(loginData: any) {
+    return this.httpClient.post(`${this.baseURL}/authenticate`, loginData)
+      .pipe(
+        tap((response: any) => {
+          if (response && response.token) {
+            localStorage.setItem('token', response.token);
+            this.decodedtoken = this.helper.decodeToken(response.token);
+            console.log(this.decodedtoken);
+          }
+        })
+      );
   }
+
 
   public loginUser(token: any) {
     localStorage.setItem("token", token)
@@ -81,6 +95,10 @@ export class AuthService {
 
   getStaus():Observable<any>{
     return this.httpClient.get<any>(`http://localhost:8080/api/v1/auth/allStatus`)
+  }
+  public getUserInfo(): any {
+    const token = this.getToken();
+    return this.jwtHelper.decodeToken(token);
   }
 
 

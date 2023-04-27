@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Ticket } from '../ticket';
 import { AuthService } from '../authService/auth.service';
 
@@ -19,8 +19,12 @@ export class TicketService {
 
 
   getTicketsList(): Observable<Ticket[]>{
-    return this.httpClient.get<Ticket[]>(`${this.baseURL}/incidents`,{headers:this.headers}) ;
+    return this.httpClient.get<Ticket[]>(`${this.baseURL}/incidents`,{headers:this.headers})
+      .pipe(map(tickets => tickets.sort((a, b) => {
+        return new Date(b.creationdate).getTime() - new Date(a.creationdate).getTime();
+      })));
   }
+  
 
 
   createTicket(ticket:any){
