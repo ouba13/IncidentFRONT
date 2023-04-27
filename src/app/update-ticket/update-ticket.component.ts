@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Ticket } from '../ticket';
 import { TicketService } from '../ticketService/ticket.service';
 import { AuthService } from '../authService/auth.service';
+import { FormGroup } from '@angular/forms';
 
 
 
@@ -13,11 +14,11 @@ import { AuthService } from '../authService/auth.service';
 })
 export class UpdateTicketComponent {
 
+  myForm!: FormGroup;
+
   id!: number;
-  statusList!:any;
-  ticket:any;
+  ticket!:Ticket;
   status!: any[] ;
-  selectedStatusId!: number;
 
   results!: any;
   resultsAssign!: any[];
@@ -32,6 +33,7 @@ export class UpdateTicketComponent {
     this.id = this.rt.snapshot.params['id'];
     this.ticketService.getTicketById(this.id).subscribe(data => {
       this.ticket =data ;
+      console.log(this.ticket)
     },error => console.log(error)) ;
 
 
@@ -40,17 +42,11 @@ export class UpdateTicketComponent {
 
   updateTicket(){
     this.ticketService.updateTicket(this.id,this.ticket).subscribe(data => {
-      this.goToTickeList();
+      this.navigateToTicketList();
       console.log(data)
     },error => console.log(error)) ;
   }
 
-  goToTickeList(){
-    this.router.navigate(['']);
-  }
-  onSubmit(){
-    this.updateTicket() ;
-  }
 
   navigateToTicketList(){
     this.router.navigate(['']);
