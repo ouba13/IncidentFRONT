@@ -9,6 +9,10 @@ import { UpdateTicketComponent } from './update-ticket/update-ticket.component';
 import { AuthGuard } from './guard/application-guard.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RestCodeComponent } from './rest-code/rest-code.component';
+import { RoleGuard } from './guard/role.guard';
+import { TicketListAssignedComponent } from './assignedComp/ticket-list-assigned/ticket-list-assigned.component';
+import { TicketListDeclarantComponent } from './declarantComp/ticket-list-declarant/ticket-list-declarant.component';
+
 const routes: Routes = [
 { path : 'ticketInfo/:id', component : TicketDetailComponent},
 { path : '', component : TicketListComponent},
@@ -18,6 +22,8 @@ const routes: Routes = [
 { path : 'sign', component : SignupComponent},
 { path : 'resetPassword', component : ResetPasswordComponent},
 { path : 'resetCode', component : RestCodeComponent},
+{ path: 'assignedComp/ticket-list', component: TicketListAssignedComponent, canActivate: [RoleGuard] },
+{ path: 'declarantComp/ticket-list', component: TicketListDeclarantComponent , canActivate: [RoleGuard] },
 
 
 

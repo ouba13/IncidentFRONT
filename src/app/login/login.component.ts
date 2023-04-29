@@ -36,8 +36,9 @@ export class LoginComponent {
       };
       this.authser.TokenUser(user).subscribe(
         (data: any) => {
-          if(data.token) {
+          if (data.token) {
             localStorage.setItem('token', data.token);
+            localStorage.setItem('role', data.role); // set the user's role in localStorage
             Swal.fire(
               'Good job!',
               'User logged In!',
@@ -58,12 +59,13 @@ export class LoginComponent {
             icon: 'error',
             title: 'Oops...',
             text: 'Invalid email or password, Please check again.',
-          })// handle error
+          })
         }
       );
     } else {
       alert('Please fill in all required fields.');
     }
+  
   }
 
 

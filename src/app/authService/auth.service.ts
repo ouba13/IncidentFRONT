@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,8 +28,9 @@ export class AuthService {
         tap((response: any) => {
           if (response && response.token) {
             localStorage.setItem('token', response.token);
-            this.decodedtoken = this.helper.decodeToken(response.token);
-            console.log(this.decodedtoken);
+            const decodedToken = this.helper.decodeToken(response.token);
+            console.log(decodedToken);
+            localStorage.setItem('role', decodedToken.role); // set the role in localStorage
           }
         })
       );
