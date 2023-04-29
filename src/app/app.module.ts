@@ -35,6 +35,7 @@ import { AddTicketDeclarantComponent } from './declarantComp/add-ticket-declaran
 import { TicketdetailDeclarantComponent } from './declarantComp/ticketdetail-declarant/ticketdetail-declarant.component';
 import { UpdateTicketlDeclarantComponent } from './declarantComp/update-ticketl-declarant/update-ticketl-declarant.component';
 import { TicketListDeclarantComponent } from './declarantComp/ticket-list-declarant/ticket-list-declarant.component';
+import { SidebarAComponent } from './sidebar-a/sidebar-a.component';
 
 
 
@@ -62,6 +63,7 @@ import { TicketListDeclarantComponent } from './declarantComp/ticket-list-declar
     TicketdetailDeclarantComponent,
     UpdateTicketlDeclarantComponent,
     TicketListDeclarantComponent,
+    SidebarAComponent,
 
   ],
   imports: [
