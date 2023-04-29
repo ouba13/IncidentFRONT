@@ -13,6 +13,11 @@ vertical-align: middle;
 font-size:20px;
 }
 
+.login-img{
+  padding-left: 25px;
+  padding-top: 10px;
+}
+
 .line{
   color:white;
 }
@@ -20,6 +25,13 @@ font-size:20px;
 .main-menu:hover,nav.main-menu.expanded {
 width:250px;
 overflow:visible;
+}
+
+.main-menu:hover .login-img {
+  display: block;
+}
+.login-img {
+  display: none;
 }
 
 .main-menu {
