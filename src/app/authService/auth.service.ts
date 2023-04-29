@@ -50,6 +50,7 @@ export class AuthService {
   public logout() {
 
     localStorage.removeItem('user');
+    localStorage.removeItem('role')
 
   }
   //get the token
@@ -72,10 +73,10 @@ export class AuthService {
     }
   }
   //get user role
-  public getUserRole() {
-    let user = this.getUser();
-    return user.role;
+  public getUserRole(){
+    return localStorage.getItem('role');
   }
+
 
   checkEmail(email:any):Observable<any>{
     return this.httpClient.post<any>(`${this.baseURL}/checkEmail`,{email}).pipe(

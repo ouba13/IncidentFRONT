@@ -38,7 +38,6 @@ export class LoginComponent {
         (data: any) => {
           if (data.token) {
             localStorage.setItem('token', data.token);
-            localStorage.setItem('role', data.decodedToken.role); // set the user's role in localStorage
             Swal.fire(
               'Good job!',
               'User logged In!',
@@ -65,7 +64,7 @@ export class LoginComponent {
     } else {
       alert('Please fill in all required fields.');
     }
-  
+
   }
 
 

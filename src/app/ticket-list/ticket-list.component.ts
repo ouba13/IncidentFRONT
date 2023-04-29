@@ -30,6 +30,9 @@ export class TicketListComponent implements OnInit {
   textAssign = "";
   results!: any;
   resultsAssign!: any[];
+
+  userRole:  string  | null = this.authser.getUserRole();
+
   submitForm() {
     let filter: any = {where:[]};
     if (this.dateInputValue != "") {
@@ -178,7 +181,7 @@ export class TicketListComponent implements OnInit {
       }
     )
   }
-  
+
 
 
 

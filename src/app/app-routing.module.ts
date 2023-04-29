@@ -14,16 +14,16 @@ import { TicketListAssignedComponent } from './assignedComp/ticket-list-assigned
 import { TicketListDeclarantComponent } from './declarantComp/ticket-list-declarant/ticket-list-declarant.component';
 
 const routes: Routes = [
-{ path : 'ticketInfo/:id', component : TicketDetailComponent},
-{ path : '', component : TicketListComponent},
-{ path : 'ajoutTicket', component : AddTicketComponent},
-{ path : 'updateTicket/:id', component : UpdateTicketComponent},
+{ path : 'ticketInfo/:id', component : TicketDetailComponent,canActivate:[AuthGuard]},
+{ path : '', component : TicketListComponent,canActivate:[AuthGuard]},
+{ path : 'ajoutTicket', component : AddTicketComponent,canActivate:[AuthGuard]},
+{ path : 'updateTicket/:id', component : UpdateTicketComponent,canActivate:[AuthGuard]},
 { path : 'login', component : LoginComponent},
 { path : 'sign', component : SignupComponent},
 { path : 'resetPassword', component : ResetPasswordComponent},
 { path : 'resetCode', component : RestCodeComponent},
-{ path: 'assignedComp/ticket-list', component: TicketListAssignedComponent, canActivate: [RoleGuard] },
-{ path: 'declarantComp/ticket-list', component: TicketListDeclarantComponent , canActivate: [RoleGuard] },
+{ path: 'assignedComp/ticket-list', component: TicketListAssignedComponent, /*canActivate: [RoleGuard]*/ },
+{ path: 'declarantComp/ticket-list', component: TicketListDeclarantComponent , /*canActivate: [RoleGuard] */},
 
 
 
