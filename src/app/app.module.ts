@@ -36,6 +36,7 @@ import { TicketdetailDeclarantComponent } from './declarantComp/ticketdetail-dec
 import { UpdateTicketlDeclarantComponent } from './declarantComp/update-ticketl-declarant/update-ticketl-declarant.component';
 import { TicketListDeclarantComponent } from './declarantComp/ticket-list-declarant/ticket-list-declarant.component';
 import { SidebarAComponent } from './sidebar-a/sidebar-a.component';
+import { RoleGuard } from './guard/role.guard';
 
 
 
@@ -89,6 +90,7 @@ import { SidebarAComponent } from './sidebar-a/sidebar-a.component';
   providers: [
     AuthService,
     AuthGuard,
+    RoleGuard
     //{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}
   ],
   bootstrap: [AppComponent]

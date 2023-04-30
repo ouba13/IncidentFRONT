@@ -38,6 +38,10 @@ export class LoginComponent {
         (data: any) => {
           if (data.token) {
             localStorage.setItem('token', data.token);
+            const role = localStorage.getItem('role');
+            console.log(this.authser.getUserRole());
+            console.log(this.authser.getUserEmail());
+            
             Swal.fire(
               'Good job!',
               'User logged In!',

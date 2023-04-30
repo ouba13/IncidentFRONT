@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, throwError } from 'rxjs';
 import { Ticket } from '../ticket';
 import { AuthService } from '../authService/auth.service';
 
@@ -39,6 +39,15 @@ export class TicketService {
   getTicketById(id: number): Observable<Ticket> {
     const url = `${this.baseURL}/getincident/${id}`;
     return this.httpClient.get<Ticket>(url,{headers:this.headers});
+  }
+
+
+  getTicketByEmail(email: string | null): Observable<Ticket> {
+    // if (!email) {
+    //   return throwError(new Error('Email cannot be null.'));
+    // }
+    const url = `${this.baseURL}/incidentsByUser?email=${email}`;
+    return this.httpClient.get<Ticket>(url, { headers: this.headers });
   }
 
   getUsers(user:any) {

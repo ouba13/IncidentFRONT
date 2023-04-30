@@ -30,7 +30,8 @@ export class AuthService {
             localStorage.setItem('token', response.token);
             const decodedToken = this.helper.decodeToken(response.token);
             console.log(decodedToken);
-            localStorage.setItem('role', decodedToken.role); // set the role in localStorage
+            localStorage.setItem('role', decodedToken.role);
+            localStorage.setItem('email', decodedToken.sub); // set the role in localStorage
           }
         })
       );
@@ -39,7 +40,6 @@ export class AuthService {
 
   public loginUser(token: any) {
     localStorage.setItem("token", token)
-
   }
 
   public isLoggedIn() {
@@ -57,6 +57,7 @@ export class AuthService {
   public getToken() {
     return localStorage.getItem('token');
   }
+
 
   //set user details
   public setUser(user: any) {
@@ -76,6 +77,10 @@ export class AuthService {
   public getUserRole(){
     return localStorage.getItem('role');
   }
+  public getUserEmail(){
+    return localStorage.getItem('email');
+  }
+
 
 
   checkEmail(email:any):Observable<any>{
