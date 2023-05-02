@@ -37,6 +37,8 @@ import { UpdateTicketlDeclarantComponent } from './declarantComp/update-ticketl-
 import { TicketListDeclarantComponent } from './declarantComp/ticket-list-declarant/ticket-list-declarant.component';
 import { SidebarAComponent } from './sidebar-a/sidebar-a.component';
 import { RoleGuard } from './guard/role.guard';
+import { NavbarassignComponent } from './assignedComp/sidebarAssigned/navbarassign/navbarassign.component';
+
 
 
 
@@ -65,6 +67,8 @@ import { RoleGuard } from './guard/role.guard';
     UpdateTicketlDeclarantComponent,
     TicketListDeclarantComponent,
     SidebarAComponent,
+    NavbarassignComponent,
+
 
   ],
   imports: [

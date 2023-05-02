@@ -41,13 +41,9 @@ export class TicketService {
     return this.httpClient.get<Ticket>(url,{headers:this.headers});
   }
 
-
-  getTicketByEmail(email: string | null): Observable<Ticket> {
-    // if (!email) {
-    //   return throwError(new Error('Email cannot be null.'));
-    // }
-    const url = `${this.baseURL}/incidentsByUser?email=${email}`;
-    return this.httpClient.get<Ticket>(url, { headers: this.headers });
+  getTicketByEmail(email: string | null): Observable<Ticket[]> {
+    const url = `${this.baseURL}/incidentsByUser?email=${email}&order=creationdate DESC`;
+    return this.httpClient.get<Ticket[]>(url, { headers: this.headers });
   }
 
   getUsers(user:any) {

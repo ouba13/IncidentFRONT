@@ -1,1 +1,51 @@
-<p>ticketdetail-declarant works!</p>
+<app-sidebar-a></app-sidebar-a>
+<i class="pi pi-arrow-left" style="font-size: 2.3rem; margin-top: 30px; margin-left: 20px;"
+    (click)="navigateToTicketList()"></i>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow " style="font-size: 1.2rem;">
+                <div class="card-header">
+                    <h3 class="text-center">Incident details</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4 font-weight-bold">ID:</div>
+                        <div class="col-8">{{ticket.id}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4 font-weight-bold">Label:</div>
+                        <div class="col-8">{{ticket.libelle}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4 font-weight-bold">Assigned to:</div>
+                        <div class="col-8">{{ticket.assigne.firstname}} {{ticket.assigne.lastname}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4 font-weight-bold">Reported by:</div>
+                        <div class="col-8">{{ticket.declarant.firstname}} {{ticket.declarant.lastname}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4 font-weight-bold">Created at:</div>
+                        <div class="col-8">{{ticket.creationdate | date:'medium'}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4 font-weight-bold">Status:</div>
+                        <div class="col-8">
+                            <div class="badge rounded-pill" [ngClass]="{'badge-secondary': ticket.status.label === 'EnCour',
+                               'badge-success': ticket.status.label === 'Terminer',
+                               'badge-danger': ticket.status.label === 'Declancher'}">
+                                {{ticket.status.label}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

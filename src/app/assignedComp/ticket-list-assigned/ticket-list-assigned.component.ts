@@ -82,7 +82,6 @@ export class TicketListAssignedComponent {
   searchAssign(event: any) {
     this.ticketService.getAssigned(event.query).then(data => {
       this.resultsAssign = data;
-      console.log(data)
     });
   }
 
@@ -105,10 +104,21 @@ export class TicketListAssignedComponent {
 
 
   getTickets() {
-    this.ticketService.getTicketByEmail(this.email).subscribe(data => {
-      this.Tickets = data;
-    });
+    this.ticketService.getTicketByEmail(this.email).subscribe(
+      data => {
+        this.Tickets = data;
+        if (this.Tickets.length === 0) {
+          // Display a message to the user
+          console.log("No incidents available for this user.");
+        }
+      },
+      error => {
+        console.log("Error in ticket ", error);
+      }
+    );
   }
+
+  
 
 
   ticketSearch(tsearch: any) {
@@ -116,7 +126,6 @@ export class TicketListAssignedComponent {
     for (const tick of this.Tickets) {
       const creationDateStr = tick.creationdate.toString(); // convert date to string
       if (creationDateStr.includes(tsearch) ||
-        tick.assigne.toLowerCase().includes(tsearch.toLowerCase()) ||
         tick.declarant.toLowerCase().includes(tsearch.toLowerCase()) ||
         tick.status.toLowerCase().includes(tsearch.toLowerCase())) {
         res.push(tick);
