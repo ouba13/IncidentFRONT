@@ -1,4 +1,4 @@
-<i class="pi pi-arrow-left" style="font-size: 2.3rem; margin-top: 30px; margin-left: 20px;" (click)="navigateToTicketList()"></i>
+<i  class="pi pi-arrow-left" style="font-size: 2.3rem; margin-top: 30px; margin-left: 20px;" (click)="navigateToTicketList()"></i>
 <div class="d-flex justify-content-center mt-3">
     <div class="card shadow-lg w-75">
       <div class="card-body">
@@ -9,16 +9,16 @@
             <input type="text" class="form-control form-control-lg" id="descri" name="libelle" [(ngModel)]="ticket &&  ticket.libelle" >
           </div>
           <div class="form-row">
-            <div class="form-group col">
+            <div *ngIf="currentUserRole == 'Admin'" class="form-group col">
               <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné a</label>
               <p-autoComplete class="autocomplete-input test" [forceSelection]="true" (onSelect)="selectAssign($event)"
               placeholder="Assingne" field="firstname" [suggestions]="resultsAssign" (completeMethod)="searchAssign($event) "
-             name="assigne.firstname" id="assigne"  [(ngModel)]="ticket && ticket.assigne" >
-            </p-autoComplete>
+              name="assigne.firstname" id="assigne"  [(ngModel)]="ticket && ticket.assigne" >
+              </p-autoComplete>
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col">
+            <div *ngIf="currentUserRole == 'Admin'" class="form-group col">
               <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant</label>
               <p-autoComplete class="autocomplete-input testo" [forceSelection]="true" (onSelect)="select($event)"
               placeholder="Declarant" field="firstname" [suggestions]="results" (completeMethod)="search($event) "
@@ -31,12 +31,12 @@
             <input disabled type="date" class="form-control form-control-lg" id="date-input" placeholder="Enter date" name="creationdate" [(ngModel)]="ticket && ticket.creationdate">
           </div>
 
-          <div class="form-group">
+          <div *ngIf="currentUserRole === 'Admin' || currentUserRole === 'Assigned'" class="form-group">
             <label for="status-select" class="mb-2" style="font-size: 20px;">Status de L'incident</label>
             <select class="form-control" id="status-select" name="status" [(ngModel)]="ticket && ticket.status">
               <option value="" disabled selected>Select a status</option>
               <option *ngFor="let st of status" [ngValue]="st">{{st.label}}</option>
-            </select>                     
+            </select>
           </div>
 
           <button class="btn btn-success mt-3" type="submit" style="font-size: 19px;" >Submit</button>

@@ -5,12 +5,13 @@
       <h3 class="text-center mb-4">Nouveau Incident</h3>
 
       <form (submit)="saveTicket()" [formGroup]="registerForm">
-        <div class="form-group">
+
+        <div *ngIf="currentUserRole" class="form-group">
           <label for="descri" class="mb-2" style="font-size: 20px;">Description de L'incident</label>
           <input type="text" class="form-control form-control-lg" id="libelle" formControlName="libelle" name="libelle" style="font-size: 18px;">
         </div>
 
-        <div class="form-group">
+        <div *ngIf="currentUserRole == 'Admin'" class="form-group">
           <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné A</label>
           <div class="row">
             <div class="col">
@@ -21,7 +22,8 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+
+        <div *ngIf="currentUserRole == 'Admin'" class="form-group">
           <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant</label>
           <div class="row">
             <div class="col">
@@ -33,12 +35,12 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div  class="form-group">
           <label for="date-input" class="mb-2" style="font-size: 20px;">Date de declaration</label>
           <input type="date" class="form-control form-control-lg" id="creationdate" formControlName="creationdate" name="creationdate" style="font-size: 18px;">
         </div>
 
-        <div class="form-group">
+        <div *ngIf="currentUserRole === 'Admin'" class="form-group">
           <label for="status-select" class="mb-2" style="font-size: 20px;">Status de L'incident</label>
           <select class="form-control" id="status" formControlName="status" name="status" style="font-size: 18px;">
             <option value="" disabled selected>Select a status</option>

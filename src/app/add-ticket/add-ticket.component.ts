@@ -20,8 +20,10 @@ export class AddTicketComponent {
   results!: any;
   textAssign = "";
   resultsAssign!: any[];
+  currentUserRole!:any
 
   ngOnInit():void{
+    this.currentUserRole = this.authser.getUserRole()
     this.registerForm = this.formBuilder.group({
       libelle: ['', Validators.required],
       assigne: ['', Validators.required],
