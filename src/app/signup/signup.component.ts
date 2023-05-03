@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 
 
 
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',

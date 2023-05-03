@@ -24,6 +24,7 @@ export class TicketListComponent implements OnInit {
   declarantInputValue: any = '';
   assignerInputValue: any = '';
   statusSelectValue: any = '';
+  email =this.authser.getUserEmail();
   constructor(private ticketService: TicketService , private router : Router,private authser:AuthService) { }
 
   text = "";
@@ -108,9 +109,15 @@ export class TicketListComponent implements OnInit {
 
 
   getTickets() {
+    if (this.userRole=='Admin'){
     this.ticketService.getTicketsList().subscribe(data => {
       this.Tickets = data;
-    });
+    });}
+    else{
+      this.ticketService.getTicketByEmail(this.email).subscribe(data => {
+        this.Tickets = data;
+      });
+    }
   }
 
 
@@ -180,6 +187,28 @@ export class TicketListComponent implements OnInit {
         this.status = data
       }
     )
+  }
+
+  getTicketsRoleBased() {
+    if (!this.email) {
+      
+      console.log("Email not available.");
+      return;
+    }
+    
+    this.ticketService.getTicketByEmail(this.email).subscribe(
+      data => {
+        this.Tickets = data;
+        if (this.Tickets.length === 0) {
+          // Display a message to the user
+          console.log(this.email);
+          console.log("No incidents available for this user.");
+        }
+      },
+      error => {
+        console.log("Error in ticket ", error);
+      }
+    );
   }
 
 
