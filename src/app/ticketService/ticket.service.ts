@@ -24,7 +24,7 @@ export class TicketService {
         return new Date(b.creationdate).getTime() - new Date(a.creationdate).getTime();
       })));
   }
-  
+
 
 
   createTicket(ticket:any){
@@ -53,17 +53,6 @@ export class TicketService {
   getAssigned(user:any) {
     return this.httpClient.get<any>("http://localhost:8080/api/v1/user/searchByAdmin?firstName="+user,{headers:this.headers}).toPromise() ;
   }
-
-
-
-  // submitForm(form: any) {
-  //   const formData: FormData = new FormData();
-  //   formData.append('dateInput', form.dateInput.value);
-  //   formData.append('declarantInput', form.declarantInput.value);
-  //   formData.append('assignerInput', form.assignerInput.value);
-  //   formData.append('statusSelect', form.statusSelect.value);
-  //   return this.httpClient.post("http://localhost:8080/search", formData);
-  // }
 
   search(filter: any) {
     return this.httpClient.post('http://localhost:8080/api/v1/incident/search', filter,{headers:this.headers});

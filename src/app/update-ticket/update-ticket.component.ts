@@ -25,15 +25,18 @@ export class UpdateTicketComponent {
   textAssign = "";
   text = "";
 
+  currentUserRole!:any
+
   constructor(private ticketService: TicketService,private router: Router,private rt: ActivatedRoute,private authser:AuthService ){}
 
   ngOnInit() : void{
-
+    this.currentUserRole =this.authser.getUserRole()
+    console.log(this.currentUserRole)
     this.getStatus();
     this.id = this.rt.snapshot.params['id'];
     this.ticketService.getTicketById(this.id).subscribe(data => {
-      this.ticket =data ;
-    },error => console.log(error)) ;
+      this.ticket =data
+    },error => console.log(error))
 
 
   }
@@ -46,7 +49,7 @@ export class UpdateTicketComponent {
       console.log(data)
     },error => console.log(error)) ;
   }
-  
+
 
 
   navigateToTicketList(){
@@ -65,7 +68,7 @@ export class UpdateTicketComponent {
   searchAssign(event: any) {
     this.ticketService.getAssigned(event.query).then(data => {
       this.resultsAssign = data;
-    
+
     });
   }
 
@@ -85,4 +88,6 @@ select(event: any) {
       this.results = data;
     });
   }
+
+
 }

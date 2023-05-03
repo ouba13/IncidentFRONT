@@ -36,6 +36,7 @@ export class SignupComponent implements OnInit {
 
     });
 
+this.getRoles()
   }
   matchOtherValidator(otherControlName: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
