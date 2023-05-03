@@ -52,12 +52,12 @@
     </ng-template>
     <ng-template pTemplate="body" let-T>
       <tr>
-        <td >{{ T.id }}</td>
-        <td >{{ T.libelle }}</td>
-        <td >{{ T.assigne.firstname }}</td>
-        <td >{{ T.declarant.firstname }}</td>
-        <td >{{ T.creationdate | date:'dd/MM/yyyy' }}</td>
-        <td [ngClass]="{'status-gray': T.status.label === 'EnCour', 'status-green': T.status.label === 'Terminer', 'status-red': T.status.label === 'Declancher'}" class="badge badge-success rounded-pill d-inline">{{ T.status.label }}</td>
+        <td >{{ T?.id }}</td>
+        <td >{{ T?.libelle }}</td>
+        <td >{{ T?.assigne?.firstname }}</td>
+        <td >{{ T?.declarant?.firstname }}</td>
+        <td >{{ T?.creationdate | date:'dd/MM/yyyy' }}</td>
+        <td [ngClass]="{'status-gray': T?.status?.label === 'EnCour', 'status-green': T?.status?.label === 'Terminer', 'status-red': T?.status?.label === 'Declancher'}" class="badge badge-success rounded-pill d-inline">{{ T.status.label }}</td>
         <td class="text-center btn2">
           <button (click)="viewTicketDetail(T.id)" class="btn btn-danger">View</button>&nbsp;
           <button (click)="updateTicket(T.id)" class="btn btn-info">Update</button>

@@ -13,7 +13,7 @@ export class TicketService {
   private baseURL="http://localhost:8080/api/v1/incident";
   constructor(private httpClient : HttpClient,private auth: AuthService) {}
 
-
+  email =this.auth.getUserEmail();
   //private headers = new HttpHeaders({'Content-Type':'application/json','Access-Control-Allow-Origin':'*'})
   private headers = new HttpHeaders({Authorization: `Bearer `+this.auth.getToken()})
 

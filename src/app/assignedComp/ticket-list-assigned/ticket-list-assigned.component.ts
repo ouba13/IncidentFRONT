@@ -104,11 +104,18 @@ export class TicketListAssignedComponent {
 
 
   getTickets() {
+    if (!this.email) {
+      
+      console.log("Email not available.");
+      return;
+    }
+    
     this.ticketService.getTicketByEmail(this.email).subscribe(
       data => {
         this.Tickets = data;
         if (this.Tickets.length === 0) {
           // Display a message to the user
+          console.log(this.email);
           console.log("No incidents available for this user.");
         }
       },

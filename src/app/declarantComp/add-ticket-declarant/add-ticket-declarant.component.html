@@ -19,7 +19,7 @@
                             <p-autoComplete class="autocomplete-input test" [forceSelection]="true"
                                 (onSelect)="selectAssign($event)" placeholder="Assingne name" field="firstname"
                                 [suggestions]="resultsAssign" (completeMethod)="searchAssign($event) "
-                                formControlName="assigne" name="assigne" id="assigne">
+                                formControlName="assigne" name="assigne" id="assigne" [disabled]="true">
                             </p-autoComplete>
                         </div>
                     </div>

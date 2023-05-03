@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/authService/auth.service';
 import { Ticket } from 'src/app/ticket';
 import { TicketService } from 'src/app/ticketService/ticket.service';
 
+
+
 @Component({
   selector: 'app-update-ticket-assigned',
   templateUrl: './update-ticket-assigned.component.html',
@@ -22,8 +24,8 @@ export class UpdateTicketAssignedComponent {
   resultsAssign!: any[];
   textAssign = "";
   text = "";
-
-  constructor(private ticketService: TicketService,private router: Router,private rt: ActivatedRoute,private authser:AuthService ){}
+  
+  constructor(private ticketService: TicketService,private router: Router,private rt: ActivatedRoute,private authser:AuthService){}
 
   ngOnInit() : void{
 

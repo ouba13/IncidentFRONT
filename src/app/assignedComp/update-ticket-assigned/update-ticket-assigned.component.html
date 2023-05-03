@@ -6,34 +6,37 @@
         <form (ngSubmit)="updateTicket()">
            <div class="form-group">
             <label for="descri" class="mb-2" style="font-size: 20px;font-weight: bold;  ">Description de L'incident</label>
-            <input type="text" class="form-control form-control-lg" id="descri" name="libelle" [(ngModel)]="ticket.libelle" disabled>
+            <ng-container *ngIf="ticket">
+              <input type="text" class="form-control form-control-lg" id="descri" name="libelle" [(ngModel)]="ticket.libelle" disabled>
+            </ng-container>
           </div>
           <div class="form-row">
             <div class="form-group col">
               <label for="assigne" class="mb-2" style="font-size: 20px;">Assigné a</label>
               <p-autoComplete class="autocomplete-input test" [forceSelection]="true" (onSelect)="selectAssign($event)"
-              placeholder="Assingne" field="firstname" [suggestions]="resultsAssign" (completeMethod)="searchAssign($event) "
-             name="assigne.firstname" id="assigne"  [(ngModel)]="ticket.assigne" [disabled]="true">
-            </p-autoComplete>
+                placeholder="Assingne" field="firstname" [suggestions]="resultsAssign" (completeMethod)="searchAssign($event) "
+                name="assigne.firstname" id="assigne" [(ngModel)]="ticket && ticket.assigne" [disabled]="true">
+              </p-autoComplete>
             </div>
           </div>
+          
           <div class="form-row">
             <div class="form-group col">
               <label for="declarant" class="mb-2" style="font-size: 20px;">Declarant</label>
               <p-autoComplete class="autocomplete-input testo" [forceSelection]="true" (onSelect)="select($event)"
                 placeholder="Declarant" field="firstname" [suggestions]="results" (completeMethod)="search($event) "
-                name="declarant.firstname" id="declarant" [(ngModel)]="ticket.declarant" [disabled]="true">
+                name="declarant.firstname" id="declarant" [(ngModel)]="ticket && ticket.declarant" [disabled]="true">
               </p-autoComplete>
             </div>
           </div>
           <div class="form-group" >
             <label for="date-input" class="mb-2" style="font-size: 20px;">Date de declaration</label>
-            <input  disabled type="date" class="form-control form-control-lg" id="date-input" placeholder="Enter date" name="creationdate" [(ngModel)]="ticket.creationdate">
+            <input  disabled type="date" class="form-control form-control-lg" id="date-input" placeholder="Enter date" name="creationdate" [(ngModel)]="ticket && ticket.creationdate">
           </div>
 
           <div class="form-group">
             <label for="status-select" class="mb-2" style="font-size: 20px;">Status de L'incident</label>
-            <select class="form-control" id="status-select" name="status" [(ngModel)]="ticket.status">
+            <select class="form-control" id="status-select" name="status" [(ngModel)]="ticket && ticket.status">
               <option value="" disabled selected>Select a status</option>
               <option *ngFor="let st of status" [ngValue]="st">{{st.label}}</option>
             </select>                     

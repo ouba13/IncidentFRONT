@@ -23,7 +23,6 @@ export class AddTicketDeclarantComponent {
   ngOnInit():void{
     this.registerForm = this.formBuilder.group({
       libelle: ['', Validators.required],
-      assigne: ['', Validators.required],
       declarant: ['', Validators.required],
       creationdate:['', Validators.required],
       status: [Status, Validators.required]
@@ -53,7 +52,7 @@ export class AddTicketDeclarantComponent {
       };
       this.ticket = {
         libelle: this.registerForm.value.libelle,
-        assigne: this.registerForm.value.assigne,
+        assigne: null,
         declarant: this.registerForm.value.declarant,
         creationdate: this.registerForm.value.creationdate,
         status:statusObject

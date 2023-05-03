@@ -56,7 +56,7 @@
             <tr>
                 <th scope="col">ID-Ticket</th>
                 <th scope="col">Description</th>
-                <th scope="col">Assigné à</th>
+                <!-- <th scope="col">Assigné à</th> -->
                 <th scope="col">Declaré Par</th>
                 <th scope="col">Date de Declaration</th>
                 <th scope="col">Status</th>
@@ -67,7 +67,7 @@
             <tr>
                 <td>{{ T.id }}</td>
                 <td>{{ T.libelle }}</td>
-                <td>{{ T.assigne.firstname }}</td>
+                <!-- <td>{{ T.assigne.firstname }}</td> -->
                 <td>{{ T.declarant.firstname }}</td>
                 <td>{{ T.creationdate | date:'dd/MM/yyyy' }}</td>
                 <td [ngClass]="{'status-gray': T.status.label === 'EnCour', 'status-green': T.status.label === 'Terminer', 'status-red': T.status.label === 'Declancher'}"

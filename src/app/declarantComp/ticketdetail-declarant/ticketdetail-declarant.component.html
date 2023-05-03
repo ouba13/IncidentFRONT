@@ -11,36 +11,35 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4 font-weight-bold">ID:</div>
-                        <div class="col-8">{{ticket.id}}</div>
+                        <div class="col-8">{{ticket?.id}}</div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-4 font-weight-bold">Label:</div>
-                        <div class="col-8">{{ticket.libelle}}</div>
+                        <div class="col-8">{{ticket?.libelle}}</div>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-4 font-weight-bold">Assigned to:</div>
-                        <div class="col-8">{{ticket.assigne.firstname}} {{ticket.assigne.lastname}}</div>
-                    </div>
+                        <div class="col-8">{{ticket?.assigne.firstname}} {{ticket?.assigne.lastname}}</div>
+                    </div> -->
                     <hr>
                     <div class="row">
                         <div class="col-4 font-weight-bold">Reported by:</div>
-                        <div class="col-8">{{ticket.declarant.firstname}} {{ticket.declarant.lastname}}</div>
+                        <div class="col-8">{{ticket?.declarant.firstname}} {{ticket?.declarant.lastname}}</div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-4 font-weight-bold">Created at:</div>
-                        <div class="col-8">{{ticket.creationdate | date:'medium'}}</div>
+                        <div class="col-8">{{ticket?.creationdate | date:'medium'}}</div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-4 font-weight-bold">Status:</div>
                         <div class="col-8">
-                            <div class="badge rounded-pill" [ngClass]="{'badge-secondary': ticket.status.label === 'EnCour',
-                               'badge-success': ticket.status.label === 'Terminer',
-                               'badge-danger': ticket.status.label === 'Declancher'}">
-                                {{ticket.status.label}}
+                            <div class="badge rounded-pill" [ngClass]="{'badge-secondary': ticket?.status.label === 'EnCour',
+                               'badge-success': ticket?.status.label === 'Terminer',
+                               'badge-danger': ticket?.status.label === 'Declancher'}">
+                                {{ticket?.status.label}}
                             </div>
                         </div>
                     </div>
