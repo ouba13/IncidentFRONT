@@ -28,16 +28,8 @@ import { RestCodeComponent } from './rest-code/rest-code.component';
 import { AuthService } from './authService/auth.service';
 import { AuthGuard } from './guard/application-guard.service';
 import { InterceptorService } from './interceptor/interceptor.service';
-import { TicketListAssignedComponent } from './assignedComp/ticket-list-assigned/ticket-list-assigned.component';
-import { ViewTicketAssignedComponent } from './assignedComp/view-ticket-assigned/view-ticket-assigned.component';
-import { UpdateTicketAssignedComponent } from './assignedComp/update-ticket-assigned/update-ticket-assigned.component';
-import { AddTicketDeclarantComponent } from './declarantComp/add-ticket-declarant/add-ticket-declarant.component';
-import { TicketdetailDeclarantComponent } from './declarantComp/ticketdetail-declarant/ticketdetail-declarant.component';
-import { UpdateTicketlDeclarantComponent } from './declarantComp/update-ticketl-declarant/update-ticketl-declarant.component';
-import { TicketListDeclarantComponent } from './declarantComp/ticket-list-declarant/ticket-list-declarant.component';
 import { SidebarAComponent } from './sidebar-a/sidebar-a.component';
 import { RoleGuard } from './guard/role.guard';
-import { NavbarassignComponent } from './assignedComp/sidebarAssigned/navbarassign/navbarassign.component';
 
 
 
@@ -59,15 +51,7 @@ import { NavbarassignComponent } from './assignedComp/sidebarAssigned/navbarassi
     LoginComponent,
     ResetPasswordComponent,
     RestCodeComponent,
-    TicketListAssignedComponent,
-    ViewTicketAssignedComponent,
-    UpdateTicketAssignedComponent,
-    AddTicketDeclarantComponent,
-    TicketdetailDeclarantComponent,
-    UpdateTicketlDeclarantComponent,
-    TicketListDeclarantComponent,
     SidebarAComponent,
-    NavbarassignComponent,
 
 
   ],

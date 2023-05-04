@@ -35,7 +35,7 @@
       <div class="form-group row">
         <div class="col-sm-12 text-right">
           <button type="submit" class="btn btn-secondary" (click)="getTickets()" style="margin-right: 20px;">Refresh</button>
-          <button type="submit" class="btn btn-primary">Search</button>
+          <button type="submit" class="btn btn-primary" (click)="submitForm()">Search</button>
         </div>
       </div>
     </form>
@@ -47,7 +47,7 @@
 
 
 <div class="card"  style="display: flex; justify-content: center; margin-top: 60px;">
-  <p-table [value]="Tickets" [paginator]="true" [rows]="2" [showCurrentPageReport]="true"
+  <p-table [value]="Tickets" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[2,5,10]">
     <ng-template pTemplate="header">
       <tr>

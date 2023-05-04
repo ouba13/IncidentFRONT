@@ -54,7 +54,11 @@ export class TicketService {
     return this.httpClient.get<any>("http://localhost:8080/api/v1/user/searchByAdmin?firstName="+user,{headers:this.headers}).toPromise() ;
   }
 
-  search(filter: any) {
-    return this.httpClient.post('http://localhost:8080/api/v1/incident/search', filter,{headers:this.headers});
+  search(filter: any,email: any) {
+    return this.httpClient.post(`http://localhost:8080/api/v1/incident/search?email=${email}`, filter,{headers:this.headers});
+  }
+
+  adminSearch(filter: any) {
+    return this.httpClient.post(`http://localhost:8080/api/v1/incident/searchAdmin`, filter,{headers:this.headers});
   }
 }

@@ -65,15 +65,27 @@ export class TicketListComponent implements OnInit {
     }
 
     console.log(filter)
-    this.ticketService.search(filter).subscribe(
-      data =>{
-        this.Tickets = data,
-        console.log(data)
-      },
-      error =>{
-      console.log(error)
-    }
-    );
+if(this.userRole =='Admin'){
+  this.ticketService.adminSearch(filter).subscribe(
+    data =>{
+      this.Tickets = data,
+      console.log(data)
+    },
+    error =>{
+    console.log(error)
+  }
+  );
+}else{this.ticketService.search(filter,this.email).subscribe(
+  data =>{
+    this.Tickets = data,
+    console.log(data)
+  },
+  error =>{
+  console.log(error)
+}
+);}
+
+
   }
 
 
@@ -114,6 +126,7 @@ export class TicketListComponent implements OnInit {
       this.Tickets = data;
     });}
     else{
+
       this.ticketService.getTicketByEmail(this.email).subscribe(data => {
         this.Tickets = data;
       });
@@ -121,22 +134,6 @@ export class TicketListComponent implements OnInit {
   }
 
 
-  ticketSearch(tsearch: any) {
-    const res: Ticket[] = [];
-    for (const tick of this.Tickets) {
-      const creationDateStr = tick.creationdate.toString(); // convert date to string
-      if (creationDateStr.includes(tsearch) ||
-        tick.assigne.toLowerCase().includes(tsearch.toLowerCase()) ||
-        tick.declarant.toLowerCase().includes(tsearch.toLowerCase()) ||
-        tick.status.toLowerCase().includes(tsearch.toLowerCase())) {
-        res.push(tick);
-      }
-    }
-    this.Tickets = res;
-    if (res.length === 0 || !tsearch) {
-      this.getTickets();
-    }
-  }
 
   viewTicketDetail(id : number){
    this.router.navigate(['ticketInfo' , id]);
@@ -191,11 +188,11 @@ export class TicketListComponent implements OnInit {
 
   getTicketsRoleBased() {
     if (!this.email) {
-      
+
       console.log("Email not available.");
       return;
     }
-    
+
     this.ticketService.getTicketByEmail(this.email).subscribe(
       data => {
         this.Tickets = data;
