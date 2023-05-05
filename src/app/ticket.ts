@@ -9,7 +9,7 @@ export class Ticket {
     declarant!: User;
     status !: Status ;
     creationdate !: Date ;
-
+    image!:File
 
 
 }

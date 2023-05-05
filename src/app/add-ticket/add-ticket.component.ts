@@ -5,6 +5,7 @@ import { TicketService } from '../ticketService/ticket.service';
 import { AuthService } from '../authService/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Status } from '../Status';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-ticket',
@@ -12,7 +13,7 @@ import { Status } from '../Status';
   styleUrls: ['./add-ticket.component.css']
 })
 export class AddTicketComponent {
-  constructor(private router: Router,private ticketService: TicketService,private authser:AuthService ,private formBuilder: FormBuilder) {}
+  constructor(private router: Router,private ticketService: TicketService,private authser:AuthService ,private formBuilder: FormBuilder,private httpClient: HttpClient) {}
   ticket:any;
   registerForm!: FormGroup;
   status: Status[] = [];
@@ -22,6 +23,7 @@ export class AddTicketComponent {
   resultsAssign!: any[];
   currentUserRole!:any
   currentUser!:any
+  selectedFile !: File
 
   ngOnInit():void{
     this.currentUserRole = this.authser.getUserRole()
@@ -30,7 +32,8 @@ export class AddTicketComponent {
       assigne: ['', ],
       declarant: ['', ],
       creationdate:['', Validators.required],
-      status: [Status, ]
+      status: [Status, ],
+      image:[File,Validators.required]
     })
     this.getStatus()
     this.getUserLoggedIn()
@@ -60,12 +63,21 @@ export class AddTicketComponent {
             label: "Declancher"
           };
 
+          console.log(this.selectedFile);
+          const uploadImageData = new FormData();
+          uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+          this.httpClient.post('http://localhost:8080/api/v1/incident/upload', uploadImageData,{ observe: 'response',headers: new HttpHeaders({Authorization: `Bearer `+this.authser.getToken()})})
+          .subscribe((response) => {
+          console.log('respone :' , response)
+          }
+      );
           this.ticket = {
             libelle: this.registerForm.value.libelle,
             assigne: null,
             declarant: this.currentUser,
             creationdate: this.registerForm.value.creationdate,
-            status:statusObject
+            status:statusObject,
+            image:this.selectedFile
           };
 
           console.log(this.ticket)
@@ -131,5 +143,10 @@ export class AddTicketComponent {
         this.currentUser = data
       }
     )
+  }
+
+  public onFileChanged(event:any) {
+    //Select File
+    this.selectedFile = event.target.files[0];
   }
 }

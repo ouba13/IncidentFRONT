@@ -48,6 +48,11 @@
           </select>
         </div>
 
+        <div class="formGroup">
+          <label for="image" class="mb-2" style="font-size: 20px;">Image</label>
+            <input type="file" class="form-control form-control-lg" formControlName="image" (change)="onFileChanged($event)">
+        </div>
+
         <button class="btn btn-success mt-3" type="submit" style="font-size: 19px;">Submit</button>
       </form>
       </div>
