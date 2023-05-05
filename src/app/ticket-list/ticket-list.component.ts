@@ -5,6 +5,7 @@ import { TicketService } from '../ticketService/ticket.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { AuthService } from '../authService/auth.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -24,19 +25,37 @@ export class TicketListComponent implements OnInit {
   declarantInputValue: any = '';
   assignerInputValue: any = '';
   statusSelectValue: any = '';
-  email =this.authser.getUserEmail();
-  constructor(private ticketService: TicketService , private router : Router,private authser:AuthService) { }
+  email = this.authser.getUserEmail();
+  constructor(private ticketService: TicketService, private router: Router, private authser: AuthService) { }
 
   text = "";
   textAssign = "";
   results!: any;
   resultsAssign!: any[];
 
-  userRole:  string  | null = this.authser.getUserRole();
+  userRole: string | null = this.authser.getUserRole();
 
   submitForm() {
-    let filter: any = {where:[]};
+    if (!this.dateInputValue && !this.declarantInputValue && !this.assignerInputValue && !this.statusSelectValue) {
+      Swal.fire({
+        title: 'No search criteria selected',
+        text: 'Please select at least one search criteria',
+        icon: 'error'
+      });
+      return;
+    }
+    let filter: any = { where: [] };
     if (this.dateInputValue != "") {
+      const selectedDate = new Date(this.dateInputValue);
+      const currentDate = new Date();
+      if (selectedDate > currentDate) {
+        Swal.fire({
+          title: 'Invalid date',
+          text: 'Please select a date that is not greater than the current system date.',
+          icon: 'error'
+        });
+        return;
+      }
       filter.where.push({
         field: 'creationdate',
         modalities: [this.dateInputValue]
@@ -44,16 +63,18 @@ export class TicketListComponent implements OnInit {
     }
 
     if (this.declarantInputValue != "") {
+
       filter.where.push({
         field: 'declarant',
-        modalities: [this.declarantInputValue.firstname]
+        modalities: [this.declarantInputValue?.firstname]
       });
+
     }
 
     if (this.assignerInputValue != "") {
       filter.where.push({
         field: 'assigne',
-        modalities: [this.assignerInputValue.firstname]
+        modalities: [this.assignerInputValue?.firstname]
       });
     }
 
@@ -65,25 +86,44 @@ export class TicketListComponent implements OnInit {
     }
 
     console.log(filter)
-if(this.userRole =='Admin'){
-  this.ticketService.adminSearch(filter).subscribe(
-    data =>{
-      this.Tickets = data,
-      console.log(data)
-    },
-    error =>{
-    console.log(error)
-  }
-  );
-}else{this.ticketService.search(filter,this.email).subscribe(
-  data =>{
-    this.Tickets = data,
-    console.log(data)
-  },
-  error =>{
-  console.log(error)
-}
-);}
+    if (this.userRole == 'Admin') {
+      this.ticketService.adminSearch(filter).subscribe(
+        data => {
+          this.Tickets = data,
+            console.log(data)
+        },
+        error => {
+          if (error.error === "No incidents found matching the search criteria") {
+            Swal.fire({
+              title: 'No incidents found',
+              text: 'There are no incidents matching the search criteria.',
+              icon: 'info'
+            });
+          } else {
+            console.log(error)
+          }
+        }
+      );
+    } else {
+      this.ticketService.search(filter, this.email).subscribe(
+        data => {
+          this.Tickets = data,
+            console.log(data)
+        },
+        error => {
+          if (error.error === "No incidents found matching the search criteria") {
+            Swal.fire({
+              title: 'No incidents found',
+              text: 'There are no incidents matching the search criteria.',
+              icon: 'info'
+            });
+          } else {
+            console.log(error)
+          }
+        }
+      );
+    }
+
 
 
   }
@@ -99,6 +139,14 @@ if(this.userRole =='Admin'){
     this.ticketService.getAssigned(event.query).then(data => {
       this.resultsAssign = data;
       console.log(data)
+      if (this.declarantInputValue && !this.results.length) {
+        Swal.fire({
+          icon: 'error',
+          title: 'User not found',
+          text: 'No users were found with that name. Please try again with a different name.',
+        });
+        return; // Stop the function from continuing
+      }
     });
   }
 
@@ -121,11 +169,12 @@ if(this.userRole =='Admin'){
 
 
   getTickets() {
-    if (this.userRole=='Admin'){
-    this.ticketService.getTicketsList().subscribe(data => {
-      this.Tickets = data;
-    });}
-    else{
+    if (this.userRole == 'Admin') {
+      this.ticketService.getTicketsList().subscribe(data => {
+        this.Tickets = data;
+      });
+    }
+    else {
 
       this.ticketService.getTicketByEmail(this.email).subscribe(data => {
         this.Tickets = data;
@@ -133,21 +182,43 @@ if(this.userRole =='Admin'){
     }
   }
 
+  getTicketsRefresh(){
+    if (this.userRole == 'Admin') {
+      this.dateInputValue = '';
+      this.declarantInputValue = '';
+      this.assignerInputValue = '';
+      this.statusSelectValue = '';
+      this.ticketService.getTicketsList().subscribe(data => {
+        this.Tickets = data;
+      });
+    }
+    else {
+      this.dateInputValue = '';
+      this.declarantInputValue = '';
+      this.assignerInputValue = '';
+      this.statusSelectValue = '';
+      this.ticketService.getTicketByEmail(this.email).subscribe(data => {
+        this.Tickets = data;
+      });
+    }
 
-
-  viewTicketDetail(id : number){
-   this.router.navigate(['ticketInfo' , id]);
   }
 
-  ajoutTicket(){
+
+
+  viewTicketDetail(id: number) {
+    this.router.navigate(['ticketInfo', id]);
+  }
+
+  ajoutTicket() {
     this.router.navigate(['ajoutTicket']);
   }
 
-  updateTicket(id:number){
-    this.router.navigate(['updateTicket',id]);
+  updateTicket(id: number) {
+    this.router.navigate(['updateTicket', id]);
   }
 
-  resetIncidents(){
+  resetIncidents() {
     return this.Tickets;
   }
 
@@ -164,7 +235,7 @@ if(this.userRole =='Admin'){
   }
 
   isLastPage(): boolean {
-    return this.Tickets ? this.first === (this.Tickets.length - this.rows): true;
+    return this.Tickets ? this.first === (this.Tickets.length - this.rows) : true;
   }
 
   isFirstPage(): boolean {
@@ -178,9 +249,9 @@ if(this.userRole =='Admin'){
     location.reload();
   }
 
-  getStatus(){
+  getStatus() {
     this.authser.getStaus().subscribe(
-      data =>{
+      data => {
         this.status = data
       }
     )
