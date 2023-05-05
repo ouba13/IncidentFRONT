@@ -21,23 +21,27 @@ export class AddTicketComponent {
   textAssign = "";
   resultsAssign!: any[];
   currentUserRole!:any
+  currentUser!:any
 
   ngOnInit():void{
     this.currentUserRole = this.authser.getUserRole()
     this.registerForm = this.formBuilder.group({
       libelle: ['', Validators.required],
-      assigne: ['', Validators.required],
-      declarant: ['', Validators.required],
+      assigne: ['', ],
+      declarant: ['', ],
       creationdate:['', Validators.required],
-      status: [Status, Validators.required]
+      status: [Status, ]
     })
     this.getStatus()
+    this.getUserLoggedIn()
+    console.log(this.currentUser)
 
   }
 
   saveTicket(){
     var id
     if (this.registerForm.valid) {
+
       switch (this.registerForm.value.status) {
         case "EnCour":
           id = 1;
@@ -49,25 +53,34 @@ export class AddTicketComponent {
           id = 3;
           break;
       }
+      switch(this.currentUserRole){
+        case "Declarant":
+          const statusObject = {
+            status_id: 3,
+            label: "Declancher"
+          };
 
-      const statusObject = {
-        status_id: id,
-        label: this.registerForm.value.status
-      };
-      this.ticket = {
-        libelle: this.registerForm.value.libelle,
-        assigne: this.registerForm.value.assigne,
-        declarant: this.registerForm.value.declarant,
-        creationdate: this.registerForm.value.creationdate,
-        status:statusObject
-    };
+          this.ticket = {
+            libelle: this.registerForm.value.libelle,
+            assigne: null,
+            declarant: this.currentUser,
+            creationdate: this.registerForm.value.creationdate,
+            status:statusObject
+          };
 
-    console.log(this.ticket)
-    this.ticketService.createTicket(this.ticket).subscribe(data => {
-      console.log(data);
-      this.goToTickeList();
-    },
-    error => console.log(error));
+          console.log(this.ticket)
+          this.ticketService.createTicket(this.ticket).subscribe(data => {
+          console.log(data);
+          this.goToTickeList();
+        },
+        error => console.log(error))
+        break;
+
+        case "Assigned":
+        console.log();
+        break;
+      }
+
   }
 }
 
@@ -83,9 +96,7 @@ export class AddTicketComponent {
   getStatus(){
     this.authser.getStaus().subscribe(
       data =>{
-        console.log(data)
         this.status = data
-        console.log(this.status)
       }
 
     )
@@ -112,5 +123,13 @@ export class AddTicketComponent {
   selectAssign(event: any) {
     console.log(event)
     this.textAssign = event.id;
+  }
+
+  getUserLoggedIn(){
+    this.authser.getUserLoggedIn(this.authser.getUserEmail()).subscribe(
+      data=>{
+        this.currentUser = data
+      }
+    )
   }
 }

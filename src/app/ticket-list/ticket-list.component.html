@@ -42,7 +42,7 @@
   </div>
 </div>
 <div class="d-flex mt-2 ml-auto">
-  <button type="button" class="btn btn-success" (click)="ajoutTicket()"  *ngIf="userRole =='Declarant'">New Ticket</button>
+  <button type="button" class="btn btn-success" (click)="ajoutTicket()"  *ngIf="userRole =='Declarant' || userRole =='Admin'">New Ticket</button>
 </div>
 
 
