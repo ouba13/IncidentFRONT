@@ -1,68 +1,68 @@
-
 .form-row label {
-    width: 100%;
-    max-width: 100%;
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+  width: 100%;
+  max-width: 100%;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
+
 .autocomplete-input {
-    height: 408px;
-    font-size: 16px;
-    line-height: 31px;
-    border: 8px #ccc ;
-    width: 100%;
+  height: 408px;
+  font-size: 16px;
+  line-height: 31px;
+  border: 8px #ccc;
+  width: 100%;
 }
 
 .form-group.row {
-    margin-top: 1.9rem;
+  margin-top: 1.9rem;
 }
 
 .card-body {
-    padding: rem;
-    margin: 3 1 rem;
+  padding: rem;
+  margin: 3 1 rem;
+  border-radius: 25px !important;
+
 }
+
 .card {
-    margin: 0 4rem;
-    box-shadow: 0px 0px 10px 2px rgba(208, 202, 202, 0.5);
-    z-index: 100;
+  margin: 0 4rem;
+  box-shadow: 0px 0px 10px 2px rgba(208, 202, 202, 0.5);
+  z-index: 100;
+  border-radius: 25px !important;
+
 }
 
 :host ::ng-deep .ui-autocomplete-input:focus {
-    border-color: rgb(35, 35, 168);
+  border-color: rgb(35, 35, 168);
 }
 
-::ng-deep  p-autocomplete.testo>span
-{
+::ng-deep p-autocomplete.testo>span {
   width: 100%;
 }
 
-::ng-deep p-autocomplete.testo>span>input
-{
+::ng-deep p-autocomplete.testo>span>input {
   width: 100%;
   height: 38px;
 }
 
-::ng-deep  p-autocomplete.testo
-{
+::ng-deep p-autocomplete.testo {
   padding-left: 0;
 }
 
-::ng-deep  p-autocomplete.test>span
-{
+::ng-deep p-autocomplete.test>span {
   width: 100%;
 }
 
-::ng-deep p-autocomplete.test>span>input
-{
+::ng-deep p-autocomplete.test>span>input {
   width: 100%;
   height: 38px;
 }
 
-::ng-deep  p-autocomplete.test
-{
+::ng-deep p-autocomplete.test {
   padding-left: 0;
 }
+
 .status-gray {
   background-color: rgb(129, 122, 122);
   color: white;
@@ -74,9 +74,10 @@
 }
 
 .status-red {
-  background-color: red;
+  background-color: #f18642;
   color: white;
 }
+
 .badge {
   font-size: 0.9rem;
   border-width: 0.2px;
@@ -89,9 +90,3 @@ button.btn.btn-success {
   margin-top: 20px;
   margin-left: 68px;
 }
-
-
-
-
-
-
