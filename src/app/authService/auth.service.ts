@@ -109,9 +109,7 @@ export class AuthService {
     return this.jwtHelper.decodeToken(token);
   }
 
-  getUserLoggedIn(email:any){
-    return this.httpClient.get(`http://localhost:8080/api/v1/user/getUserByEmail?email=${email}`,{headers:this.headers})
-  }
+  
 
 
 }

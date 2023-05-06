@@ -24,6 +24,7 @@ export class AddTicketComponent {
   currentUserRole!:any
   currentUser!:any
   selectedFile !: File
+  image!:any
 
   ngOnInit():void{
     this.currentUserRole = this.authser.getUserRole()
@@ -37,7 +38,6 @@ export class AddTicketComponent {
     })
     this.getStatus()
     this.getUserLoggedIn()
-    console.log(this.currentUser)
 
   }
 
@@ -62,34 +62,28 @@ export class AddTicketComponent {
             status_id: 3,
             label: "Declancher"
           };
-
-          console.log(this.selectedFile);
           const uploadImageData = new FormData();
           uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-          this.httpClient.post('http://localhost:8080/api/v1/incident/upload', uploadImageData,{ observe: 'response',headers: new HttpHeaders({Authorization: `Bearer `+this.authser.getToken()})})
-          .subscribe((response) => {
-          console.log('respone :' , response)
-          }
-      );
+
           this.ticket = {
             libelle: this.registerForm.value.libelle,
             assigne: null,
             declarant: this.currentUser,
             creationdate: this.registerForm.value.creationdate,
-            status:statusObject,
-            image:this.selectedFile
+            status:statusObject
           };
 
           console.log(this.ticket)
-          this.ticketService.createTicket(this.ticket).subscribe(data => {
-          console.log(data);
-          this.goToTickeList();
-        },
-        error => console.log(error))
-        break;
+          this.ticketService.createTicket(this.ticket,this.selectedFile).subscribe(//this is using /addticket endpoitn
+          data => {
+            console.log(data);
+            this.goToTickeList();
+          },
+          error => console.log(error))
+          break;
 
         case "Assigned":
-        console.log();
+          console.log();
         break;
       }
 
@@ -138,7 +132,7 @@ export class AddTicketComponent {
   }
 
   getUserLoggedIn(){
-    this.authser.getUserLoggedIn(this.authser.getUserEmail()).subscribe(
+    this.ticketService.getUserLoggedIn(this.authser.getUserEmail()).subscribe(
       data=>{
         this.currentUser = data
       }

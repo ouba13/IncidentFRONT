@@ -15,7 +15,10 @@ export class TicketService {
 
   email =this.auth.getUserEmail();
   //private headers = new HttpHeaders({'Content-Type':'application/json','Access-Control-Allow-Origin':'*'})
-  private headers = new HttpHeaders({Authorization: `Bearer `+this.auth.getToken()})
+  private headers = new HttpHeaders({
+    Authorization: `Bearer ` + this.auth.getToken(),
+    'Access-Control-Allow-Origin': '*'
+  });
 
 
   getTicketsList(): Observable<Ticket[]>{
@@ -27,9 +30,19 @@ export class TicketService {
 
 
 
-  createTicket(ticket:any){
-    return this.httpClient.post(`${this.baseURL}/addIncident`,ticket,{headers:this.headers}) ;
+  createTicket(ticket: any,file:any) {
+    const formData = new FormData();
+    formData.append('incident', JSON.stringify(ticket));
+    formData.append('img', file);
+    const url = `${this.baseURL}/addIncident`;
+    const headers  = new HttpHeaders({
+      Authorization: `Bearer ` + this.auth.getToken(),
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'multipart/form-data'
+    });
+    return this.httpClient.post(url, formData, { headers: headers });
   }
+
 
   updateTicket(id: number, ticket: any){
     return this.httpClient.put(`${this.baseURL}/incidents/${id}`, ticket,{headers:this.headers});
@@ -60,5 +73,13 @@ export class TicketService {
 
   adminSearch(filter: any) {
     return this.httpClient.post(`http://localhost:8080/api/v1/incident/searchAdmin`, filter,{headers:this.headers});
+  }
+
+  uploadImage(uploadImageData:any){
+    return this.httpClient.post('http://localhost:8080/api/v1/incident/upload',uploadImageData,{headers:this.headers})
+  }
+
+  getUserLoggedIn(email:any){
+    return this.httpClient.get(`http://localhost:8080/api/v1/user/getUserByEmail?email=${email}`,{headers:this.headers})
   }
 }
