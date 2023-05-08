@@ -30,17 +30,11 @@ export class TicketService {
 
 
 
-  createTicket(ticket: any,file:any) {
-    const formData = new FormData();
-    formData.append('incident', JSON.stringify(ticket));
-    formData.append('img', file);
+  createTicket(ticket: any) {
+
     const url = `${this.baseURL}/addIncident`;
-    const headers  = new HttpHeaders({
-      Authorization: `Bearer ` + this.auth.getToken(),
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'multipart/form-data'
-    });
-    return this.httpClient.post(url, formData, { headers: headers });
+
+    return this.httpClient.post(url, ticket, { headers: this.headers });
   }
 
 

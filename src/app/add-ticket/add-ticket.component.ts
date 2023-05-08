@@ -13,7 +13,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./add-ticket.component.css']
 })
 export class AddTicketComponent {
-  constructor(private router: Router,private ticketService: TicketService,private authser:AuthService ,private formBuilder: FormBuilder,private httpClient: HttpClient) {}
+  currentDate!: string;
+  constructor(private router: Router,private ticketService: TicketService,private authser:AuthService ,private formBuilder: FormBuilder,private httpClient: HttpClient) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = (today.getMonth() + 1).toString().padStart(2, '0'); // padStart adds a leading zero if the month is a single digit
+    const dd = today.getDate().toString().padStart(2, '0');
+    this.currentDate = `${yyyy}-${dd}-${mm}`;
+  }
   ticket:any;
   registerForm!: FormGroup;
   status: Status[] = [];
@@ -32,7 +39,7 @@ export class AddTicketComponent {
       libelle: ['', Validators.required],
       assigne: ['', ],
       declarant: ['', ],
-      creationdate:['', Validators.required],
+      creationdate:[{value: '', disabled: true}, Validators.required],
       status: [Status, ],
       image:[File,Validators.required]
     })
@@ -62,19 +69,16 @@ export class AddTicketComponent {
             status_id: 3,
             label: "Declancher"
           };
-          const uploadImageData = new FormData();
-          uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-
           this.ticket = {
             libelle: this.registerForm.value.libelle,
             assigne: null,
             declarant: this.currentUser,
-            creationdate: this.registerForm.value.creationdate,
+            creationdate: new Date(),
             status:statusObject
           };
 
           console.log(this.ticket)
-          this.ticketService.createTicket(this.ticket,this.selectedFile).subscribe(//this is using /addticket endpoitn
+          this.ticketService.createTicket(this.ticket).subscribe(//this is using /addticket endpoitn
           data => {
             console.log(data);
             this.goToTickeList();

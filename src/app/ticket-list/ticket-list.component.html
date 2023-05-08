@@ -1,10 +1,12 @@
 <app-sidebar></app-sidebar>
 
-<div style="color:rgb(107, 107, 227); font-size: large; font-weight: bolder; text-align: center;">
-  <label for="tcketsearch" style="margin-bottom: -4.5rem">Ticket Search</label>
-</div>
+
 <div class="card shadow rounded" style="margin-top: 10px;">
   <div class="card-body">
+    <div style="color:rgb(107, 107, 227); font-size: large; font-weight: bolder; text-align: center;">
+      <label for="tcketsearch" style="margin-bottom: -4.5rem">Ticket Search</label>
+    </div>
+    <br>
     <form #form (submit)="submitForm()"> <!--(submit)="submitForm(form)" -->
       <div class="form-row">
         <div class="col-sm-3">
@@ -55,7 +57,7 @@
 
 
 <div class="card" style="display: flex; justify-content: center; margin-top: 60px;">
-  <p-table [value]="Tickets" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+  <p-table [value]="Tickets" [paginator]="true" [rows]="4" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[2,5,10]">
     <ng-template pTemplate="header">
       <tr>

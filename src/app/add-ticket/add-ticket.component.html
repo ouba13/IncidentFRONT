@@ -37,7 +37,7 @@
 
         <div  class="form-group">
           <label for="date-input" class="mb-2" style="font-size: 20px;">Date de declaration</label>
-          <input type="date" class="form-control form-control-lg" id="creationdate" formControlName="creationdate" name="creationdate" style="font-size: 18px;">
+          <input type="date" class="form-control form-control-lg" id="creationdate" [(ngModel)]="currentDate"  formControlName="creationdate" name="creationdate" style="font-size: 18px;">
         </div>
 
         <div *ngIf="currentUserRole === 'Admin'" class="form-group">
@@ -48,11 +48,11 @@
           </select>
         </div>
 
-        <div class="formGroup">
+        <!-- <div class="formGroup">
           <label for="image" class="mb-2" style="font-size: 20px;">Image</label>
             <input type="file" accept="image/*" class="form-control form-control-lg" formControlName="image" (change)="onFileChanged($event)">
           </div>
-
+        -->
         <button class="btn btn-success mt-3" type="submit" style="font-size: 19px;">Submit</button>
       </form>
       </div>
